@@ -136,29 +136,29 @@ footer{padding:4rem 0 1rem;text-align:center;font-size:.75rem;opacity:.6}
 <body>
 
 <!-- ===== NAV ===== -->
-<nav class="top-nav">
+<nav class="top-nav" role="navigation">
   <a href="#"><img src="novalogo.png" alt="Nova logo" class="logo"></a>
   <div class="nav-links">
-    <a href="terms.html">Terms & Conditions</a>
-    <a href="privacy.html">Privacy Policy</a>
-    <a href="contact.html">Contact Us</a>
+    <a href="terms.html">Terms & Conditions</a>
+    <a href="privacy.html">Privacy Policy</a>
+    <a href="contact.html">Contact Us</a>
   </div>
   <button class="burger" aria-label="menu" aria-expanded="false"><span></span><span></span><span></span></button>
 </nav>
 
 <!-- ===== DRAWER ===== -->
 <div class="nav-drawer" id="drawer">
-<a href="terms.html">Terms & Conditions</a>
-<a href="privacy.html">Privacy Policy</a>
-<a href="contact.html">Contact Us</a>
+  <a href="terms.html">Terms & Conditions</a>
+  <a href="privacy.html">Privacy Policy</a>
+  <a href="contact.html">Contact Us</a>
 </div>
 
 <!-- ===== HERO ===== -->
 <header>
   <div class="container hero-inner">
     <div class="hero-copy">
-      <!-- ===== NEW LOGO ADDED HERE ===== -->
-      <img src="novalogo.png" alt="Nova Logo" class="hero-top-logo">
+      <!-- ===== LOGO AT TOP OF HERO ===== -->
+      <img src="novalogo.png" alt="Nova logo" class="hero-top-logo">
       
       <p class="tag">Meet Nova</p>
       <h1>The AI <span>Companion</span> who never ghosts you</h1>
@@ -186,9 +186,20 @@ footer{padding:4rem 0 1rem;text-align:center;font-size:.75rem;opacity:.6}
 <footer class="container">© 2025 Nova Labs. All rights reserved.<br>Privacy-first, security-obsessed, 100 % 🍪-free.</footer>
 
 <script>
-const burger=document.querySelector('.burger'),drawer=document.getElementById('drawer');
-burger.addEventListener('click',()=>{const open=burger.classList.toggle('open');drawer.classList.toggle('open',open);burger.setAttribute('aria-expanded',open)});
-drawer.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{burger.classList.contains('open')&&burger.click()}));
+const burger = document.querySelector('.burger'),
+      drawer = document.getElementById('drawer');
+
+burger.addEventListener('click', () => {
+  const open = burger.classList.toggle('open');
+  drawer.classList.toggle('open', open);
+  burger.setAttribute('aria-expanded', open);
+});
+
+drawer.querySelectorAll('a').forEach(a =>
+  a.addEventListener('click', () => {
+    if (burger.classList.contains('open')) burger.click();
+  })
+);
 </script>
 </body>
 </html>
