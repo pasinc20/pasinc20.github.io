@@ -31,7 +31,11 @@ img{max-width:100%;height:auto;display:block}
   display:flex;align-items:center;justify-content:space-between;
   padding:0 1.25rem;z-index:200;border-bottom:1px solid #1e1e28;
 }
-.logo{height:36px;width:auto}
+/* ROUND LOGO */
+.logo{
+  height:36px;width:36px;border-radius:50%;
+  object-fit:cover;
+}
 
 /* desktop links (hidden by default) */
 .nav-links{display:none;gap:1.75rem}
@@ -89,11 +93,11 @@ h1 span{color:var(--accent)}
 .hero-actions{display:flex;justify-content:center;margin-top:1.5rem}
 .hero-visual img{width:240px;margin:0 auto}
 
-/* ===== STYLE FOR NEW LOGO ===== */
-.hero-top-logo {
-  height: 80px;
-  width: auto;
-  margin: 0 auto 2rem; /* Centers the logo and adds space below it */
+/* ===== STYLE FOR NEW ROUND LOGO IN HERO ===== */
+.hero-top-logo{
+  height:80px;width:80px;border-radius:50%;
+  object-fit:cover;
+  margin:0 auto 2rem;
 }
 
 /* ---------- Features ---------- */
@@ -119,7 +123,6 @@ footer{padding:4rem 0 1rem;text-align:center;font-size:.75rem;opacity:.6}
   .hero-copy{flex:1}
   .hero-visual{flex:1;min-height:280px}
   .hero-visual img{width:280px}
-  /* On desktop, the logo will automatically align left with the text */
 }
 @media (max-width:450px){
   body{font-size:15px}
@@ -157,7 +160,7 @@ footer{padding:4rem 0 1rem;text-align:center;font-size:.75rem;opacity:.6}
 <header>
   <div class="container hero-inner">
     <div class="hero-copy">
-      <!-- ===== LOGO AT TOP OF HERO ===== -->
+      <!-- ROUND LOGO IN HERO -->
       <img src="novalogo.png" alt="Nova logo" class="hero-top-logo">
       
       <p class="tag">Meet Nova</p>
