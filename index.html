@@ -2,10 +2,10 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <title>Subsfan — Huzz Pro & Nova Companion</title>
+  <title>Huzz Pro & Nova Companion</title>
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <meta name="description" content="Discover Huzz Pro and Nova Companion — two smart iOS apps from Subsfan." />
-  <link rel="icon" href="logo.png" />
+  <meta name="description" content="Explore Huzz Pro and Nova Companion — two smart iOS apps." />
+  <link rel="icon" href="subsly.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;800&display=swap" rel="stylesheet">
@@ -33,7 +33,7 @@
     header{position:sticky;top:0;z-index:10;background:color-mix(in oklab, var(--panel) 85%, transparent);border-bottom:1px solid var(--border);backdrop-filter:blur(8px)}
     .nav{max-width:1100px;margin:0 auto;padding:14px 16px;display:flex;align-items:center;justify-content:space-between;gap:12px}
     .brand{display:inline-flex;gap:10px;align-items:center;text-decoration:none;color:var(--text)}
-    .brand-badge{width:28px;height:28px;border-radius:8px;background:linear-gradient(135deg,var(--primary),var(--accent));display:grid;place-items:center;font-weight:800;color:#0a0f16;box-shadow:var(--shadow)}
+    .brand-img{width:28px;height:28px;border-radius:6px;box-shadow:var(--shadow)}
     .btn{appearance:none;border:1px solid var(--border);background:var(--card);color:var(--text);padding:10px 14px;border-radius:12px;font-weight:600;text-decoration:none;cursor:pointer;transition:transform .15s ease,border-color .15s ease}
     .btn:hover{transform:translateY(-1px);border-color:color-mix(in oklab, var(--primary), #fff 12%)}
     .btn.primary{background:linear-gradient(180deg, color-mix(in oklab, var(--primary), #fff 15%), var(--primary));border-color:transparent;color:#0a0f16}
@@ -54,7 +54,9 @@
     .actions{padding:14px 16px;border-top:1px solid var(--border);display:flex;flex-wrap:wrap;gap:10px;background:color-mix(in oklab, var(--panel) 90%, transparent)}
 
     footer{border-top:1px solid var(--border);background:color-mix(in oklab, var(--panel) 90%, transparent)}
-    .foot{max-width:1100px;margin:0 auto;padding:18px 16px;font-size:14px;color:var(--muted);display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
+    .foot{max-width:1100px;margin:0 auto;padding:18px 16px;font-size:14px;color:var(--muted);display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;align-items:center}
+    .brand-foot{display:inline-flex;gap:10px;align-items:center}
+    .brand-foot img{width:24px;height:24px;border-radius:5px}
     .links{display:flex;gap:12px;flex-wrap:wrap}
     .links a{color:var(--muted);text-decoration:none;border-bottom:1px dashed transparent}
     .links a:hover{border-color:var(--muted)}
@@ -64,7 +66,7 @@
   <div class="wrap">
     <header>
       <nav class="nav">
-        <a class="brand" href="/"><span class="brand-badge">S</span><strong>Subsfan</strong></a>
+        <a class="brand" href="/"><img class="brand-img" src="subsly.png" alt="Subsly logo"></a>
         <div style="display:flex;gap:8px;flex-wrap:wrap">
           <a class="btn" href="huzzpro.html">Huzz Pro</a>
           <a class="btn" href="nova.html">Nova Companion</a>
@@ -123,7 +125,9 @@
 
     <footer>
       <div class="foot">
-        <div>© <span id="year"></span> Subsfan</div>
+        <div class="brand-foot">
+          <img src="subsly.png" alt="Subsly logo"><span>© <span id="year"></span></span>
+        </div>
         <div class="links">
           <a href="contact.html">Contact</a>
           <a href="privacy.html">Privacy</a>
