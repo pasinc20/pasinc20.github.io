@@ -1,10 +1,9 @@
-<!-- /huzzpro/support.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>Support – Huzz Pro</title>
+<title>Privacy Policy – Huzz Pro</title>
 <meta name="theme-color" content="#13131a">
 <link rel="icon" href="/subsly.png">
 <style>
@@ -12,18 +11,16 @@
 *{box-sizing:border-box;margin:0;padding:0}
 body{font-family:var(--ff);background:var(--bg);color:var(--fg);padding-top:var(--nav-h);line-height:1.65;-webkit-font-smoothing:antialiased}
 a{color:var(--accent);text-decoration:none}
-h1,h2{font-weight:600;margin:1.8rem 0 .6rem}
+h1,h2,h3{font-weight:600;margin:1.8rem 0 .6rem}
 h1{font-size:2rem}
-h2{font-size:1.2rem}
+h2{font-size:1.25rem}
 p,li{font-size:1rem;margin:.6rem 0}
-li{margin-left:1rem}
-.container{max-width:840px;margin:0 auto;padding:0 1.25rem}
+ul{padding-left:1.25rem}
+.container{max-width:860px;margin:0 auto;padding:0 1.25rem}
 .top-nav{position:fixed;top:0;left:0;right:0;height:var(--nav-h);background:#13131a;border-bottom:1px solid #222;display:flex;align-items:center;justify-content:space-between;padding:0 1rem;z-index:100}
-.nav-links{display:flex;gap:1.3rem;font-size:.95rem}
+.nav-links{display:flex;gap:1.1rem;font-size:.95rem}
 .logo{height:32px}
 .card{background:#13131a;border:1px solid #222;padding:18px;border-radius:14px}
-.grid{display:grid;gap:14px;grid-template-columns:1fr}
-@media(min-width:720px){.grid{grid-template-columns:1fr 1fr}}
 @media(max-width:600px){.nav-links{gap:.8rem;font-size:.85rem}}
 </style>
 </head>
@@ -40,47 +37,76 @@ li{margin-left:1rem}
 </nav>
 
 <main class="container">
-  <h1>Support – Huzz Pro</h1>
-  <p>If you need help with Huzz Pro, start with the quick steps below or contact us.</p>
+  <h1>Privacy Policy</h1>
+  <p><em>Last updated: 16&nbsp;August&nbsp;2025</em></p>
 
-  <div class="grid" style="margin-top:10px">
-    <section class="card">
-      <h2>Contact</h2>
-      <p>Email us: <a href="mailto:support@subsly.ai">support@subsly.ai</a></p>
-      <p>When you write, include:
-        <ul>
-          <li>Your device model &amp; iOS version</li>
-          <li>Huzz Pro app version (Settings → About)</li>
-          <li>Steps to reproduce the issue (screenshots if possible)</li>
-        </ul>
-      </p>
-    </section>
+  <div class="card">
+    <h2>1) Who we are</h2>
+    <p><strong>Subsly</strong> (“we”, “us”) publishes the <strong>Huzz Pro</strong> app and this site. This policy explains what we collect, why, and your choices.</p>
 
-    <section class="card">
-      <h2>Download / Billing</h2>
-      <p><a href="https://apps.apple.com/gb/app/huzz-pro/id6747211112">Get Huzz Pro on the App Store</a></p>
-      <p>Manage subscriptions in the App Store: Settings → Apple ID → Subscriptions.</p>
-    </section>
+    <h2>2) What we collect</h2>
+    <ul>
+      <li><strong>Content you provide</strong> — text you type/paste, and images/screenshots you attach or capture with the camera for analysis.</li>
+      <li><strong>Purchase data</strong> — product identifier (<code>premium_weekly_599</code>), transaction IDs, subscription status (via Apple StoreKit). We never receive card numbers.</li>
+      <li><strong>App usage</strong> — basic interaction events (e.g., free-usage counters kept locally with <code>UserDefaults</code>), feature toggles, and non-identifying diagnostics if the OS provides them.</li>
+      <li><strong>Device data</strong> — device model, OS version, language, timezone, app version.</li>
+    </ul>
 
-    <section class="card">
-      <h2>Troubleshooting</h2>
-      <ul>
-        <li><strong>App stuck or slow?</strong> Force close and reopen Huzz Pro.</li>
-        <li><strong>No results from AI?</strong> Check your connection and try again.</li>
-        <li><strong>Image/screenshot not detected?</strong> Ensure the screenshot is clear; reopen and retry.</li>
-        <li><strong>Still broken?</strong> Reinstall the app (purchases stay tied to your Apple ID).</li>
-      </ul>
-    </section>
+    <h2>3) How we use data</h2>
+    <ul>
+      <li><strong>Generate AI results</strong> for your requests (e.g., ghostwritten replies, profile openers, live scene advice). Your text/images are sent to our API gateway to reach the AI model provider and returned as output.</li>
+      <li><strong>Subscriptions</strong> — verify and manage your auto-renewing subscription and restore purchases with Apple.</li>
+      <li><strong>Quality &amp; safety</strong> — improve reliability, prevent abuse, and debug issues.</li>
+      <li><strong>Support</strong> — respond if you contact us.</li>
+    </ul>
 
-    <section class="card">
-      <h2>Privacy &amp; Terms</h2>
-      <p>Read our <a href="/huzzpro/privacy.html">Privacy Policy</a> and <a href="/huzzpro/terms.html">Terms &amp; Conditions</a>.</p>
-    </section>
+    <h2>4) AI &amp; third parties</h2>
+    <ul>
+      <li><strong>AI processing</strong>: We route requests through our gateway (e.g., Cloudflare Workers) to an AI model provider (e.g., Google Gemini) to create responses. Content is processed for the sole purpose of generating your result.</li>
+      <li><strong>Apple</strong>: In-App Purchases, subscription status, and receipts are handled by Apple (StoreKit / App Store).</li>
+      <li><strong>No ads, no sale</strong>: We do not sell your personal data or use third-party ad tracking SDKs.</li>
+    </ul>
+
+    <h2>5) Legal bases (EEA/UK)</h2>
+    <p>We rely on <em>contractual necessity</em> (to provide the app), <em>legitimate interests</em> (security, quality, fraud prevention), and <em>consent</em> where required (e.g., camera/photos permissions).</p>
+
+    <h2>6) Data retention</h2>
+    <ul>
+      <li><strong>Content</strong>: kept only as long as necessary to fulfill your request and maintain service reliability; not used for advertising.</li>
+      <li><strong>Purchases</strong>: retained as required for accounting/compliance.</li>
+      <li><strong>Diagnostics</strong>: typically up to 24 months if collected.</li>
+      <li><strong>Backups</strong>: limited-duration backups may persist for ≤30 days.</li>
+    </ul>
+
+    <h2>7) Your choices &amp; rights</h2>
+    <ul>
+      <li><strong>Permissions</strong>: You can deny Camera/Photos access in iOS Settings.</li>
+      <li><strong>Access / delete</strong>: Email us to access or delete your personal data.</li>
+      <li><strong>Region rights</strong>: Depending on your region, you may request correction, export, deletion, or restriction, or object to certain processing.</li>
+    </ul>
+
+    <h2>8) Children</h2>
+    <p>Huzz Pro is not directed to children under 16, and we do not knowingly collect their data.</p>
+
+    <h2>9) Security</h2>
+    <p>We use TLS in transit, encryption at rest for stored data, and least-privilege access. No method is 100% secure, but we work to protect your information.</p>
+
+    <h2>10) International transfers</h2>
+    <p>Processing may occur in the US or other countries where our providers operate. Where required, we use Standard Contractual Clauses or equivalent safeguards.</p>
+
+    <h2>11) Subscriptions &amp; billing summary</h2>
+    <p>Huzz Pro offers a 3-day free trial, then <strong>$5.99/week</strong>, auto-renewing until cancelled. Payment is charged to your Apple ID; manage or cancel anytime in <em>Settings ▸ Apple ID ▸ Subscriptions</em>. See the <a href="/huzzpro/terms.html">Terms</a> for full details.</p>
+
+    <h2>12) Contact</h2>
+    <p>Email privacy requests to <a href="mailto:privacy@subsly.ai">privacy@subsly.ai</a> or support at <a href="mailto:support@subsly.ai">support@subsly.ai</a>.</p>
+
+    <h2>13) Changes</h2>
+    <p>We may update this policy and will post changes here. Material updates may also be announced in-app.</p>
   </div>
 </main>
 
 <footer class="container" style="padding:3rem 1.25rem;text-align:center;font-size:.8rem;opacity:.6">
-© 2025 Subsly.
+  © 2025 Subsly.
 </footer>
 
 </body>
