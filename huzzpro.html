@@ -5,7 +5,7 @@
   <title>Huzz Pro — Your AI Conversation Wingman</title>
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <meta name="description" content="Huzz Pro is your AI wingman for smarter, smoother messages. Get context-aware replies in seconds." />
-  <link rel="icon" href="/assets/favicon.ico" />
+  <link rel="icon" href="huzzpro.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;800&display=swap" rel="stylesheet">
@@ -55,14 +55,6 @@
     @media(min-width:760px){.shot{height:320px}}
     .features{display:grid;gap:10px;margin:0;padding:0 0 0 18px;color:var(--muted);line-height:1.6}
     .actions{padding:14px 16px;border-top:1px solid var(--border);display:flex;flex-wrap:wrap;gap:10px;background:color-mix(in oklab, var(--panel) 90%, transparent)}
-    .badge{display:inline-block;border-radius:10px;overflow:hidden;border:1px solid var(--border)}
-    .badge img{display:block;height:54px}
-
-    footer{border-top:1px solid var(--border);background:color-mix(in oklab, var(--panel) 90%, transparent)}
-    .foot{max-width:1100px;margin:0 auto;padding:18px 16px;font-size:14px;color:var(--muted);display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
-    .links{display:flex;gap:12px;flex-wrap:wrap}
-    .links a{color:var(--muted);text-decoration:none;border-bottom:1px dashed transparent}
-    .links a:hover{border-color:var(--muted)}
   </style>
 </head>
 <body>
@@ -71,8 +63,8 @@
       <nav class="nav">
         <a class="brand" href="/"><span class="brand-badge">S</span><strong>Subsfan</strong></a>
         <div style="display:flex;gap:8px;flex-wrap:wrap">
-          <a class="btn" href="/huzzpro">Huzz Pro</a>
-          <a class="btn" href="/nova">Nova Companion</a>
+          <a class="btn" href="huzzpro.html">Huzz Pro</a>
+          <a class="btn" href="nova.html">Nova Companion</a>
         </div>
       </nav>
     </header>
@@ -83,7 +75,7 @@
         <div class="card">
           <div class="app">
             <div class="icon">
-              <img src="/assets/huzzpro-icon.png" alt="Huzz Pro app icon (placeholder)">
+              <img src="huzzpro.png" alt="Huzz Pro app icon">
             </div>
             <div>
               <h1>Huzz Pro</h1>
@@ -93,17 +85,15 @@
                 <span class="pill">iPhone • iPad • Mac</span>
                 <span class="pill">17+</span>
               </div>
-              <div class="actions" style="margin-top:12px;padding:0;border:0;background:transparent">
-                <a class="badge" href="https://apps.apple.com/gb/app/huzz-pro/id6747211112" aria-label="Download on the App Store">
-                  <img src="/assets/app-store-badge.png" alt="Download on the App Store">
-                </a>
-                <a class="btn" href="mailto:hello@subsfan.com?subject=Huzz%20Pro%20Support">Support</a>
+              <div class="actions" style="margin-top:12px">
+                <a class="btn primary" href="https://apps.apple.com/gb/app/huzz-pro/id6747211112">Download on the App Store</a>
+                <a class="btn" href="contact.html">Support</a>
               </div>
             </div>
           </div>
         </div>
 
-        <!-- Quick summary card to mirror home style -->
+        <!-- Summary -->
         <div class="card" style="padding:16px">
           <h2 style="margin:6px 0 10px;letter-spacing:-.01em">Why Huzz Pro?</h2>
           <ul class="features">
@@ -115,25 +105,25 @@
         </div>
       </section>
 
-      <!-- Screenshots -->
+      <!-- Screenshots (temporary placeholder using IMG.png if you like) -->
       <section class="section">
         <div class="gallery">
-          <figure class="shot"><img src="/assets/huzzpro-screen1.jpg" alt="Huzz Pro screenshot 1 (placeholder)"></figure>
-          <figure class="shot"><img src="/assets/huzzpro-screen2.jpg" alt="Huzz Pro screenshot 2 (placeholder)"></figure>
-          <figure class="shot"><img src="/assets/huzzpro-screen3.jpg" alt="Huzz Pro screenshot 3 (placeholder)"></figure>
-          <figure class="shot"><img src="/assets/huzzpro-screen4.jpg" alt="Huzz Pro screenshot 4 (placeholder)"></figure>
+          <figure class="shot"><img src="IMG.png" alt="Huzz Pro screenshot placeholder 1"></figure>
+          <figure class="shot"><img src="IMG.png" alt="Huzz Pro screenshot placeholder 2"></figure>
+          <figure class="shot"><img src="IMG.png" alt="Huzz Pro screenshot placeholder 3"></figure>
+          <figure class="shot"><img src="IMG.png" alt="Huzz Pro screenshot placeholder 4"></figure>
         </div>
       </section>
     </main>
 
     <footer>
-      <div class="foot">
-        <div>© <span id="year"></span> Subsfan / Huzz Pro</div>
-        <div class="links">
-          <a href="mailto:hello@subsfan.com">Contact</a>
-          <a href="/huzzpro/privacy.html">Privacy</a>
-          <a href="/huzzpro/terms.html">Terms</a>
-          <a href="https://apps.apple.com/gb/app/huzz-pro/id6747211112">App Store</a>
+      <div class="foot" style="display:flex;justify-content:space-between;align-items:center;padding:18px 16px;border-top:1px solid var(--border);background:color-mix(in oklab, var(--panel) 90%, transparent)">
+        <div style="color:var(--muted);font-size:14px">© <span id="year"></span> Subsfan / Huzz Pro</div>
+        <div class="links" style="display:flex;gap:12px;flex-wrap:wrap">
+          <a href="contact.html" style="color:var(--muted);text-decoration:none;border-bottom:1px dashed transparent">Contact</a>
+          <a href="privacy.html" style="color:var(--muted);text-decoration:none;border-bottom:1px dashed transparent">Privacy</a>
+          <a href="terms.html" style="color:var(--muted);text-decoration:none;border-bottom:1px dashed transparent">Terms</a>
+          <a href="https://apps.apple.com/gb/app/huzz-pro/id6747211112" style="color:var(--muted);text-decoration:none;border-bottom:1px dashed transparent">App Store</a>
         </div>
       </div>
     </footer>
