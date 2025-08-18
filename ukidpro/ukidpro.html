@@ -41,6 +41,8 @@
                linear-gradient(180deg,var(--bg),var(--bg2));
   }
   a{color:inherit;text-decoration:none}
+  img{max-width:100%;display:block}
+
   .wrap{max-width:1120px;margin:0 auto;padding:0 20px}
 
   /* NAV */
@@ -52,7 +54,7 @@
   }
   .nav .wrap{display:flex;align-items:center;gap:18px;padding:14px 20px;position:relative}
   .logo{display:flex;align-items:center;gap:10px;font-weight:700}
-  .logo svg{width:28px;height:28px}
+  .logo-img{width:28px;height:28px;border-radius:6px;object-fit:cover;box-shadow:0 4px 10px rgba(0,0,0,.25)}
   .spacer{flex:1}
   .nav a.link{opacity:.85;padding:8px 10px;border-radius:10px;white-space:nowrap}
   .btn{
@@ -62,19 +64,23 @@
   }
   .btn.secondary{background:var(--glass);color:var(--text);border:1px solid var(--border);box-shadow:none}
 
-  /* NEW: mobile burger */
+  /* Burger */
   .burger{
-    display:none;align-items:center;justify-content:center;gap:6px;
+    display:none;align-items:center;justify-content:center;
     padding:9px 10px;border:1px solid var(--border);border-radius:12px;background:transparent;color:var(--text);
+    flex-direction:column; /* STACK BARS VERTICALLY */
+    gap:6px;
   }
   .burger span{display:block;width:22px;height:2px;background:var(--text);border-radius:2px}
+
   .menu{display:flex;align-items:center;gap:14px}
 
-  /* HERO & rest (unchanged) */
+  /* HERO & rest */
   .hero{padding:64px 0 28px}
   .grid{display:grid;gap:22px}
   @media(min-width:900px){ .hero .grid{grid-template-columns:1.1fr .9fr;align-items:center} }
-  h1{font-size:clamp(32px,5vw,56px);line-height:1.05;margin:8px 0 14px}
+  h1{display:flex;align-items:center;gap:12px;font-size:clamp(32px,5vw,56px);line-height:1.05;margin:8px 0 14px}
+  .appicon{width:42px;height:42px;border-radius:9px;box-shadow:0 6px 18px rgba(0,0,0,.35)}
   p.lead{color:var(--muted);font-size:clamp(16px,2.3vw,20px)}
   .card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow)}
   .phone{aspect-ratio:9/19;border-radius:32px;border:1px solid var(--border);background:linear-gradient(180deg,rgba(255,255,255,.06),rgba(255,255,255,.03));position:relative;overflow:hidden}
@@ -114,6 +120,7 @@
 
   .footer{padding:30px 0;color:var(--muted);border-top:1px solid var(--border);background:rgba(0,0,0,.2)}
   .footer a{color:var(--text)}
+  .footer .brand{display:flex;align-items:center;gap:10px}
 
   .fade{opacity:0;transform:translateY(10px);transition:opacity .6s ease, transform .6s ease}
   .fade.show{opacity:1;transform:none}
@@ -141,18 +148,7 @@
 <header class="nav" id="topNav">
   <div class="wrap">
     <div class="logo">
-      <svg viewBox="0 0 64 64" aria-hidden="true">
-        <rect rx="14" ry="14" width="64" height="64" fill="#0b1020"/>
-        <g transform="translate(10,10)">
-          <circle cx="18" cy="20" r="9" fill="#fff"/>
-          <rect x="6" y="33" width="24" height="9" rx="4.5" fill="#fff"/>
-          <g transform="translate(30,28)">
-            <rect width="18" height="12" rx="2" fill="#c8102e"/>
-            <path d="M0,0 18,12 M18,0 0,12" stroke="#fff" stroke-width="2"/>
-            <path d="M0,0 18,12 M18,0 0,12" stroke="#005eb8" stroke-width="4" opacity=".9"/>
-          </g>
-        </g>
-      </svg>
+      <img class="logo-img" src="ukidpro.png" alt="UK ID Photo Pro logo" />
       <span>UK ID Photo Pro</span>
     </div>
 
@@ -163,7 +159,7 @@
       <span></span><span></span><span></span>
     </button>
 
-    <!-- Links + CTA (turns into dropdown on mobile) -->
+    <!-- Links + CTA (dropdown on mobile) -->
     <div class="menu" id="navMenu">
       <a class="link" href="#features">Features</a>
       <a class="link" href="#how">How it works</a>
@@ -197,7 +193,10 @@
           <strong>UK-compliant</strong> Passport & DVLA
         </span>
 
-        <h1>Create perfect UK ID photos on your iPhone</h1>
+        <h1>
+          <img class="appicon" src="ukidpro.png" alt="UK ID Photo Pro icon">
+          Create perfect UK ID photos on your iPhone
+        </h1>
         <p class="lead">
           Live head-size guide (29–34&nbsp;mm), lighting & shadow checks, baby/child mode,
           automatic background, and one-tap export (JPEG + A4 PDF). Everything is processed <strong>on-device</strong>.
@@ -331,7 +330,10 @@
 
 <footer class="footer">
   <div class="wrap" style="display:flex;gap:10px;align-items:center;justify-content:space-between;flex-wrap:wrap">
-    <div>© <span id="year"></span> UK ID Photo Pro</div>
+    <div class="brand">
+      <img class="logo-img" src="ukidpro.png" alt="UK ID Photo Pro logo">
+      <span>© <span id="year"></span> UK ID Photo Pro</span>
+    </div>
     <div style="display:flex;gap:16px">
       <a href="mailto:support@example.com">Support</a>
       <a href="#faq">FAQ</a>
