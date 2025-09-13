@@ -1,0 +1,952 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ThinkTask — Turn talk into action</title>
+  <meta name="description" content="ThinkTask turns your voice notes into a clear, actionable game plan you can check off. Record → Clean → Checklist.">
+  <meta name="keywords" content="ThinkTask, voice notes, transcription, to-do, game plan, checklist, ADHD-friendly, productivity, speech to text">
+  <meta name="theme-color" content="#0E1626">
+  <meta property="og:title" content="ThinkTask — Turn talk into action">
+  <meta property="og:description" content="Speak your idea. Get a clean, actionable game plan.">
+  <meta property="og:type" content="website">
+
+  <style>
+    :root{
+      --bg-top:#0d1624;
+      --bg-bot:#0a0e18;
+      --card:#FFFFFF0F;
+      --card-strong:#FFFFFF14;
+      --line:#FFFFFF14;
+      --text:#FFFFFF;
+      --text-dim:#FFFFFFB3;
+      --accent:#1380EC;
+      --accent-2:#4CC38A;
+      --warn:#ffd166;
+      --danger:#e5484d;
+      --shadow:0 10px 30px rgba(0,0,0,.35);
+      --radius:16px;
+      --radius-sm:12px;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Inter',
+                   'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      color:var(--text);
+      background: radial-gradient(1200px 800px at 20% -10%, #122039, transparent 60%),
+                  linear-gradient(180deg, var(--bg-top), var(--bg-bot));
+      letter-spacing:.2px;
+    }
+    a{color:var(--text); text-decoration:none}
+    .wrap{max-width:1120px;margin:0 auto;padding:24px}
+    header.nav{
+      position:sticky; top:0; z-index:40;
+      backdrop-filter:saturate(1.2) blur(8px);
+      background:linear-gradient(180deg, #0d1624dd, #0d162400);
+      border-bottom:1px solid #ffffff12;
+    }
+    .nav-row{display:flex;align-items:center;gap:16px;justify-content:space-between}
+    .brand{display:flex;gap:10px;align-items:center}
+    .logo{
+      width:28px;height:28px;border-radius:8px;
+      background: radial-gradient(180px 140px at 20% 0%, #ff3b30, #ff453a 38%, #8b0d0d 90%);
+      box-shadow:0 6px 22px rgba(255,59,48,.35), inset 0 0 0 2px #ffffff22;
+      position:relative;
+    }
+    .logo:after{ /* tiny green tick */
+      content:""; position:absolute; right:-3px; bottom:-3px; width:14px;height:14px;border-radius:999px;
+      background:radial-gradient(circle at 30% 30%, #7ef2b0, #22c55e);
+      box-shadow:0 2px 10px rgba(34,197,94,.6), inset 0 0 0 2px #ffffff33;
+      mask: none;
+    }
+    .brand b{font-weight:700; letter-spacing:.3px}
+    .nav-links a{opacity:.86; padding:10px 12px; border-radius:10px}
+    .nav-links a:hover{background:#FFFFFF14}
+    .cta{
+      display:inline-flex; align-items:center; gap:10px; padding:12px 16px;
+      background:linear-gradient(180deg,#2b8af5,#0f6ad4);
+      color:#fff; border-radius:14px; box-shadow:var(--shadow); font-weight:700;
+      border:1px solid #ffffff22;
+      transform:translateZ(0);
+    }
+    .cta.secondary{
+      background:#ffffff1e; border:1px solid #ffffff2e; font-weight:600;
+    }
+    .cta:active{transform:scale(.98)}
+    .hero{
+      padding:64px 0 32px;
+      display:grid; grid-template-columns:1.1fr .9fr; gap:28px; align-items:center;
+    }
+    @media (max-width:980px){ .hero{grid-template-columns:1fr; padding-top:32px}}
+    h1{font-size: clamp(32px, 5vw, 58px); line-height:1.04; margin:10px 0 14px}
+    .lede{font-size: clamp(16px, 2.6vw, 19px); color:var(--text-dim); max-width:48ch}
+    .hero-ctas{display:flex; gap:14px; flex-wrap:wrap; margin-top:16px}
+    /* iPhone preview card */
+    .device{
+      width:min(400px, 88vw); height:720px; justify-self:end;
+      border-radius:36px; background:linear-gradient(180deg,#0f1726,#0b101c);
+      border:1px solid #ffffff1a; box-shadow:0 40px 140px rgba(0,0,0,.55), inset 0 0 0 2px #ffffff0e;
+      padding:18px; position:relative; overflow:hidden;
+    }
+    @media (max-width:980px){ .device{justify-self:center; height:640px} }
+    .notch{position:absolute; top:10px; left:50%; transform:translateX(-50%); width:160px; height:26px; background:#000; border-radius:18px}
+    .screen{
+      position:absolute; inset:18px; border-radius:26px; overflow:hidden;
+      background:linear-gradient(180deg,#0e1523,#0a0e18);
+      border:1px solid #ffffff12;
+    }
+    .toolbar{
+      position:absolute; top:0; left:0; right:0; height:56px; display:flex;
+      align-items:center; justify-content:center; gap:8px; color:#fff; font-weight:600;
+      background:linear-gradient(180deg, #0e1528cc, #0e152800);
+      border-bottom:1px solid #ffffff10;
+    }
+    .mic-zone{
+      position:absolute; top:82px; left:0; right:0; height:260px; display:grid; place-items:center;
+    }
+    .rings{
+      position:relative; width:260px; height:260px; opacity:.92;
+    }
+    .ring, .ring2, .ring3{
+      position:absolute;border-radius:999px; border:1px solid #ffffff14; inset:0; margin:auto;
+      animation:breath 1.2s ease-in-out infinite alternate;
+    }
+    .ring{width:260px; height:260px}
+    .ring2{width:200px;height:200px;opacity:.8; animation-delay:.05s}
+    .ring3{width:140px;height:140px;opacity:.7; animation-delay:.1s}
+    @keyframes breath{from{transform:scale(.96)} to{transform:scale(1.04)}}
+    .redpulse, .redpulse2{
+      position:absolute; border-radius:999px; border:3px solid rgba(255,59,48,.8);
+      width:118px; height:118px; box-shadow:0 12px 28px rgba(255,59,48,.45);
+      animation:pulseOut 1.0s ease-out infinite; mix-blend:screen;
+    }
+    .redpulse2{ border-color: rgba(255,59,48,.55); animation-duration:1.6s; }
+    @keyframes pulseOut{ 0%{transform:scale(1); opacity:1} 100%{transform:scale(1.4); opacity:0} }
+    .mic-btn{
+      position:absolute; inset:0; margin:auto; width:96px; height:96px; border-radius:999px;
+      background:radial-gradient(circle at 50% 20%, #ff3b30, #c51119 70% );
+      display:grid; place-items:center; color:#fff; font-size:34px; font-weight:800;
+      box-shadow:0 22px 40px rgba(255,59,48,.5), inset 0 0 0 2px #ffffff2a;
+      cursor:pointer; user-select:none; transition:transform .12s ease;
+    }
+    .mic-btn:active{transform:scale(.98)}
+    .hint{position:absolute; top:24px; left:50%; transform:translateX(-50%); font-weight:700; font-size:28px}
+    .subhint{position:absolute; top:64px; left:50%; transform:translateX(-50%); font-size:16px; opacity:.7}
+    .side-pause{
+      position:absolute; right:14px; top:18px; display:flex; gap:10px;
+    }
+    .pill{
+      display:inline-flex; align-items:center; gap:8px; padding:10px 12px; border-radius:12px;
+      background:#ffffff20; border:1px solid #ffffff2e; cursor:pointer; user-select:none;
+    }
+
+    .panel{
+      position:absolute; left:0; right:0; bottom:0; top:360px; padding:14px; display:flex; flex-direction:column; gap:10px;
+    }
+    .editor{
+      background:var(--card); border:1px solid var(--line); border-radius:14px; padding:10px;
+      min-height:120px; max-height:180px; overflow:auto;
+    }
+    textarea{width:100%; border:none; outline:none; resize:vertical; min-height:110px;
+      background:transparent; color:var(--text); font: inherit}
+    .row{display:flex; gap:10px; flex-wrap:wrap}
+    .btn{
+      display:inline-flex; align-items:center; gap:8px; padding:10px 14px; border-radius:12px;
+      background:#ffffff1e; border:1px solid #ffffff2e; cursor:pointer; user-select:none; font-weight:600;
+    }
+    .btn.primary{background:linear-gradient(180deg,#2b8af5,#0f6ad4); border-color:#ffffff2e}
+    .btn.green{background:linear-gradient(180deg,#4CC38A,#2aa76e)}
+    .btn.warn{background:#ffe8b0; color:#0a0e18; border-color:#ffdc86}
+    .btn:active{transform:translateY(1px)}
+    .toast{
+      position:fixed; left:50%; bottom:22px; transform:translateX(-50%);
+      background:#000000d0; color:#fff; padding:12px 16px; border-radius:12px; border:1px solid #ffffff20; display:none; z-index:80;
+    }
+
+    /* sections */
+    section{padding:56px 0; border-top:1px solid #ffffff10}
+    .grid-3{display:grid; gap:16px; grid-template-columns:repeat(3,1fr)}
+    @media (max-width:980px){ .grid-3{grid-template-columns:1fr} }
+    .card{
+      background:var(--card); border:1px solid var(--line); border-radius:var(--radius); padding:18px; box-shadow:var(--shadow);
+    }
+    .card h3{margin:0 0 8px}
+    .muted{color:var(--text-dim)}
+
+    .plans{
+      display:grid; grid-template-columns:1fr 1fr; gap:16px;
+    }
+    @media (max-width:980px){ .plans{grid-template-columns:1fr} }
+
+    .list, .saved{
+      display:flex; flex-direction:column; gap:10px;
+    }
+    .item{
+      display:flex; gap:10px; align-items:flex-start; padding:12px; border-radius:12px; background:#ffffff12; border:1px solid #ffffff22;
+      position:relative;
+    }
+    .item input[type="checkbox"]{transform:translateY(2px)}
+    .item.dragging{opacity:.6}
+    .del{position:absolute; right:10px; top:10px; padding:6px 10px; background:#00000055; border-radius:8px; border:1px solid #ffffff2a; cursor:pointer}
+    progress{width:100%; height:10px; -webkit-appearance:none; appearance:none}
+    progress::-webkit-progress-bar{background:#ffffff18;border-radius:8px}
+    progress::-webkit-progress-value{background:linear-gradient(90deg,#2b8af5,#4CC38A); border-radius:8px}
+    .tag{display:inline-flex; align-items:center; gap:8px; padding:8px 10px; border-radius:999px; background:#ffffff18; border:1px solid #ffffff22}
+
+    footer{padding:56px 0 80px; color:#ffffffb8}
+    .links{display:flex; gap:16px; flex-wrap:wrap; margin-top:10px}
+    .hr{height:1px;background:#ffffff14;margin:18px 0}
+
+    /* Light mode (toggle in Settings) */
+    .light{
+      --bg-top:#f4f7fb;
+      --bg-bot:#e9eef6;
+      --card:#FFFFFF;
+      --card-strong:#FFFFFF;
+      --line:#00000010;
+      --text:#111827;
+      --text-dim:#1f2937b8;
+      --shadow:0 10px 30px rgba(0,0,0,.12);
+    }
+    .light .device{background:#f8fbff}
+    .light .rings .ring, .light .ring2, .light .ring3{border-color:#00000010}
+    .light .mic-btn{box-shadow:0 18px 36px rgba(255,59,48,.32), inset 0 0 0 2px #00000014}
+    .light .nav-links a:hover{background:#00000008}
+  </style>
+</head>
+<body>
+
+  <header class="nav">
+    <div class="wrap nav-row">
+      <div class="brand">
+        <div class="logo" aria-hidden="true"></div>
+        <b>ThinkTask</b>
+        <span class="tag">v2.4 — iOS + Web demo</span>
+      </div>
+      <nav class="nav-links" aria-label="Primary">
+        <a href="#features">Features</a>
+        <a href="#demo">Live Demo</a>
+        <a href="#plans">Game Plans</a>
+        <a href="#faq">FAQ</a>
+        <a href="#settings">Settings</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section class="hero">
+      <div>
+        <h1>Turn talk into action.</h1>
+        <p class="lede">Speak an idea. ThinkTask transcribes it and turns it into a concise, actionable game plan you can check off — fast, clean, and delightfully minimal.</p>
+        <div class="hero-ctas">
+          <a class="cta" href="#" onclick="alert('App Store coming soon ✨'); return false;">
+            <span></span> <span>Get on the App&nbsp;Store</span>
+          </a>
+          <a class="cta secondary" href="#demo">Try the Web Demo</a>
+        </div>
+      </div>
+
+      <!-- iPhone preview with live mic + editor -->
+      <div class="device" aria-label="ThinkTask preview">
+        <div class="notch"></div>
+        <div class="screen">
+          <div class="toolbar">ThinkTask</div>
+          <div class="mic-zone">
+            <div class="hint" id="hintText">Tap to record</div>
+            <div class="subhint" id="subHintText">your game plan</div>
+
+            <div class="rings" id="rings">
+              <div class="ring"></div>
+              <div class="ring2"></div>
+              <div class="ring3"></div>
+              <div class="redpulse" id="pulseA" style="display:none;"></div>
+              <div class="redpulse2" id="pulseB" style="display:none;"></div>
+              <div class="mic-btn" id="micBtn" title="Tap to record">🎙️</div>
+            </div>
+
+            <div class="side-pause">
+              <div class="pill" id="pauseBtn" title="Pause / Resume" style="display:none;">⏸ Pause</div>
+            </div>
+          </div>
+
+          <div class="panel">
+            <div class="editor"><textarea id="transcript" placeholder="Your transcript will appear here…"></textarea></div>
+            <div class="row">
+              <button class="btn" id="copyBtn">📄 Copy</button>
+              <button class="btn" id="shareBtn">⬆️ Share</button>
+              <button class="btn" id="importBtn">📥 Import Text</button>
+              <input type="file" id="hiddenFile" accept=".txt,.md,text/plain" hidden>
+              <button class="btn primary" id="goBtn">✅ Go!</button>
+            </div>
+            <div class="row">
+              <button class="btn" id="saveQueueBtn">💾 Save (offline)</button>
+              <button class="btn" id="clearBtn">🧹 Clear</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="features">
+      <h2>Built for speed. Designed with care.</h2>
+      <div class="grid-3" style="margin-top:16px">
+        <div class="card">
+          <h3>Record • Pause • Resume</h3>
+          <p class="muted">Tap the red mic to start. Pause without losing the transcript. Works in-browser where Web Speech API is supported.</p>
+        </div>
+        <div class="card">
+          <h3>Game Plan generator</h3>
+          <p class="muted">Click <b>Go!</b> to transform raw thoughts into a short title, summary, and a crisp checklist. No server needed for the demo.</p>
+        </div>
+        <div class="card">
+          <h3>Offline-friendly</h3>
+          <p class="muted">No connection? Save transcripts to the local queue and process them later — right in your browser.</p>
+        </div>
+        <div class="card">
+          <h3>Reorder & swipe-delete</h3>
+          <p class="muted">Drag and drop tasks to prioritize. Remove with a tap. Progress updates instantly.</p>
+        </div>
+        <div class="card">
+          <h3>Confetti & haptics (iOS)</h3>
+          <p class="muted">Checking off the last task triggers a tiny celebration. Because small wins matter.</p>
+        </div>
+        <div class="card">
+          <h3>Privacy-first</h3>
+          <p class="muted">Your demo runs locally. If you add an API key in Settings, it is kept in your browser only.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="demo">
+      <h2>Live Demo</h2>
+      <p class="muted">Use the phone preview above. Then review and save your plan below.</p>
+      <div class="plans" style="margin-top:16px">
+        <div class="card">
+          <h3>Draft (from your last “Go!”)</h3>
+          <div class="hr"></div>
+          <div class="row" style="flex-wrap:nowrap;gap:8px;align-items:center">
+            <input id="title" class="input" placeholder="Plan title" style="flex:1; padding:10px; border-radius:12px; border:1px solid var(--line); background:var(--card); color:var(--text)" />
+            <span class="tag" id="progressTag">0%</span>
+          </div>
+          <div style="margin-top:10px">
+            <textarea id="summary" placeholder="2–3 sentence summary" style="width:100%; min-height:80px; border-radius:12px; border:1px solid var(--line); background:var(--card); color:var(--text); padding:10px"></textarea>
+          </div>
+          <div style="margin-top:12px"><progress id="progress" value="0" max="1"></progress></div>
+          <div class="list" id="taskList" style="margin-top:12px"></div>
+
+          <div class="row" style="margin-top:12px">
+            <button class="btn" id="addItemBtn">➕ Add item</button>
+            <button class="btn" id="reorderHelpBtn">↕️ Reorder: drag the left handle</button>
+            <button class="btn green" id="savePlanBtn">💾 Save Plan</button>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>Saved</h3>
+          <div class="hr"></div>
+          <div class="saved" id="savedPlans"></div>
+          <div class="row" style="margin-top:10px">
+            <button class="btn danger" id="clearPlansBtn" style="background:#e5484d; border-color:#ff9a9d">🗑 Clear all</button>
+          </div>
+
+          <h3 style="margin-top:24px">Offline Queue</h3>
+          <div class="hr"></div>
+          <div class="saved" id="offlineQueue"></div>
+          <div class="row" style="margin-top:10px">
+            <button class="btn primary" id="processQueueBtn">⚙️ Process first → Draft</button>
+            <button class="btn" id="clearQueueBtn">🗑 Clear queue</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="plans">
+      <h2>How plan generation works (demo)</h2>
+      <div class="card">
+        <p class="muted">
+          The web demo strips filler (e.g. “um”, “like”, “kinda”), splits into sentences, and turns imperative-leaning phrases into checklist items.
+          On iOS, ThinkTask can also use your AI key to call Gemini and produce richer output.
+        </p>
+      </div>
+    </section>
+
+    <section id="settings">
+      <h2>Settings</h2>
+      <div class="grid-3" style="margin-top:16px">
+        <div class="card">
+          <h3>Appearance</h3>
+          <div class="row"><button class="btn" id="toggleTheme">🌗 Toggle Light/Dark</button></div>
+        </div>
+        <div class="card">
+          <h3>Speech</h3>
+          <p class="muted">Web demo uses the browser’s Web Speech API when available.</p>
+          <div class="row"><span class="tag" id="speechStatus">Checking…</span></div>
+        </div>
+        <div class="card">
+          <h3>Bring your own Gemini key (optional)</h3>
+          <p class="muted">Stored locally in your browser. Used only when you press <b>Go!</b>.</p>
+          <input id="apiKey" placeholder="Paste API key here" style="width:100%; padding:10px; border-radius:12px; border:1px solid var(--line); background:var(--card); color:var(--text)">
+          <div class="row" style="margin-top:10px">
+            <button class="btn" id="saveKeyBtn">🔐 Save key</button>
+            <button class="btn" id="clearKeyBtn">❌ Remove key</button>
+          </div>
+          <small class="muted">Endpoint: <code>v1beta/models/gemini-2.5-pro:generateContent</code></small>
+        </div>
+      </div>
+    </section>
+
+    <section id="faq">
+      <h2>FAQ</h2>
+      <div class="grid-3" style="margin-top:16px">
+        <div class="card"><h3>Does the web demo send my audio anywhere?</h3><p class="muted">No. It runs in your browser. If you add an AI key, it will call the API from your device.</p></div>
+        <div class="card"><h3>Will it work without Chrome?</h3><p class="muted">Recording depends on the Web Speech API (best in Chromium browsers). You can always paste text.</p></div>
+        <div class="card"><h3>Is this the full iOS app?</h3><p class="muted">It’s a faithful preview: record/pause, offline queue, local plan generator, reordering, progress, confetti.</p></div>
+      </div>
+    </section>
+
+    <footer>
+      <div class="hr"></div>
+      <div class="brand"><div class="logo"></div><b>ThinkTask</b></div>
+      <div class="links">
+        <a href="#" onclick="openPolicy('privacy');return false;">Privacy</a>
+        <a href="#" onclick="openPolicy('terms');return false;">Terms</a>
+        <span>•</span>
+        <span>Made for iOS • Web demo included</span>
+      </div>
+    </footer>
+  </main>
+
+  <div class="toast" id="toast">Copied</div>
+
+  <script>
+    /* =========================
+       Local state & helpers
+    ==========================*/
+    const qs = sel => document.querySelector(sel);
+    const el = {
+      micBtn: qs('#micBtn'),
+      pauseBtn: qs('#pauseBtn'),
+      pulseA: qs('#pulseA'),
+      pulseB: qs('#pulseB'),
+      hintText: qs('#hintText'),
+      subHint: qs('#subHintText'),
+      rings: qs('#rings'),
+      transcript: qs('#transcript'),
+      copyBtn: qs('#copyBtn'),
+      shareBtn: qs('#shareBtn'),
+      importBtn: qs('#importBtn'),
+      hiddenFile: qs('#hiddenFile'),
+      goBtn: qs('#goBtn'),
+      saveQueueBtn: qs('#saveQueueBtn'),
+      clearBtn: qs('#clearBtn'),
+      toast: qs('#toast'),
+      title: qs('#title'),
+      summary: qs('#summary'),
+      progress: qs('#progress'),
+      progressTag: qs('#progressTag'),
+      taskList: qs('#taskList'),
+      addItemBtn: qs('#addItemBtn'),
+      savedPlans: qs('#savedPlans'),
+      clearPlansBtn: qs('#clearPlansBtn'),
+      offlineQueue: qs('#offlineQueue'),
+      processQueueBtn: qs('#processQueueBtn'),
+      clearQueueBtn: qs('#clearQueueBtn'),
+      toggleTheme: qs('#toggleTheme'),
+      speechStatus: qs('#speechStatus'),
+      apiKey: qs('#apiKey'),
+      saveKeyBtn: qs('#saveKeyBtn'),
+      clearKeyBtn: qs('#clearKeyBtn'),
+    };
+
+    const LS = {
+      plans: 'thinktask.plans.v1',
+      queue: 'thinktask.queue.v1',
+      apiKey: 'thinktask.apikey'
+    };
+
+    function showToast(msg='Done'){
+      el.toast.textContent = msg;
+      el.toast.style.display = 'block';
+      clearTimeout(showToast._t);
+      showToast._t = setTimeout(()=> el.toast.style.display='none', 1200);
+    }
+
+    function saveLocal(key, value){
+      localStorage.setItem(key, JSON.stringify(value));
+    }
+    function loadLocal(key, fallback){
+      try { return JSON.parse(localStorage.getItem(key) || '') ?? fallback } catch{ return fallback }
+    }
+
+    /* =========================
+       Web Speech (record/pause)
+    ==========================*/
+    let recognition = null;
+    let isRecording = false;
+    let isPaused = false;
+
+    function speechSupported(){
+      return 'webkitSpeechRecognition' in window || 'SpeechRecognition' in window;
+    }
+
+    function updateSpeechStatus(){
+      el.speechStatus.textContent = speechSupported() ? 'Web Speech: available' : 'Web Speech: not available';
+      el.speechStatus.style.background = speechSupported() ? '#1b8c4e' : '#6b72804d';
+    }
+
+    function setMicVisuals(active){
+      el.pulseA.style.display = active ? 'block' : 'none';
+      el.pulseB.style.display = active ? 'block' : 'none';
+      el.hintText.textContent = active ? (isPaused ? 'Paused' : 'Listening…') : 'Tap to record';
+      el.subHint.textContent = 'your game plan';
+      el.pauseBtn.style.display = active ? 'inline-flex' : 'none';
+      el.pauseBtn.textContent = isPaused ? '▶️ Resume' : '⏸ Pause';
+    }
+
+    function startRecording(){
+      if(!speechSupported()){ showToast('Recording not supported'); return; }
+      const Rec = window.SpeechRecognition || window.webkitSpeechRecognition;
+      recognition = new Rec();
+      recognition.lang = navigator.language || 'en-GB';
+      recognition.interimResults = true;
+      recognition.continuous = true;
+
+      recognition.onresult = (e)=>{
+        let txt = '';
+        for(let i = e.resultIndex; i < e.results.length; i++){
+          txt += e.results[i][0].transcript;
+        }
+        if(txt.trim()){
+          const existing = el.transcript.value.trim();
+          el.transcript.value = existing ? existing + ' ' + txt : txt;
+          el.transcript.scrollTop = el.transcript.scrollHeight;
+        }
+      };
+      recognition.onerror = (e)=> { showToast('Speech error'); console.warn(e); stopRecording(); };
+      recognition.onend = ()=> { if(isRecording && !isPaused){ /* auto-restart */ recognition.start(); } };
+
+      isRecording = true; isPaused = false;
+      setMicVisuals(true);
+      recognition.start();
+    }
+
+    function pauseRecording(){
+      if(!recognition) return;
+      isPaused = true;
+      setMicVisuals(true);
+      recognition.stop(); // will not auto-restart while paused
+    }
+
+    function resumeRecording(){
+      if(!recognition) return;
+      isPaused = false;
+      setMicVisuals(true);
+      recognition.start();
+    }
+
+    function stopRecording(){
+      isRecording = false; isPaused = false;
+      setMicVisuals(false);
+      if(recognition){ recognition.onend = null; recognition.stop(); recognition = null; }
+    }
+
+    /* =========================
+       Transcript actions
+    ==========================*/
+    el.copyBtn.onclick = ()=>{
+      navigator.clipboard.writeText(el.transcript.value || '').then(()=> showToast('Copied'));
+    };
+    el.shareBtn.onclick = async ()=>{
+      const text = el.transcript.value.trim();
+      if(navigator.share){
+        try{ await navigator.share({text}); }catch{}
+      }else{
+        navigator.clipboard.writeText(text);
+        showToast('Copied to clipboard');
+      }
+    };
+    el.importBtn.onclick = ()=> el.hiddenFile.click();
+    el.hiddenFile.onchange = async (e)=>{
+      const f = e.target.files?.[0]; if(!f) return;
+      const txt = await f.text();
+      el.transcript.value = txt;
+      showToast('Imported');
+      e.target.value = '';
+    };
+    el.clearBtn.onclick = ()=> { el.transcript.value=''; showToast('Cleared') };
+    el.saveQueueBtn.onclick = ()=>{
+      const t = el.transcript.value.trim();
+      if(!t){ showToast('Nothing to save'); return; }
+      const q = loadLocal(LS.queue, []);
+      q.unshift({ id: crypto.randomUUID(), date: new Date().toISOString(), text: t });
+      saveLocal(LS.queue, q);
+      renderQueue();
+      el.transcript.value = '';
+      showToast('Saved offline');
+    };
+
+    /* =========================
+       Plan generation
+    ==========================*/
+    const FILLERS = ['um','uh','like','kinda','sort of','you know','basically','literally','just','maybe','probably','I guess','I think'];
+    function cleanTranscript(raw){
+      let t = ' ' + raw.replace(/\s+/g,' ').trim() + ' ';
+      FILLERS.forEach(f=>{
+        const re = new RegExp(`\\s${f}\\s`,'gi');
+        t = t.replace(re,' ');
+      });
+      return t.replace(/\s+/g,' ').trim();
+    }
+
+    async function maybeGeminiPlan(text){
+      const key = (localStorage.getItem(LS.apiKey)||'').replace(/"/g,'').trim();
+      if(!key) return null;
+      try{
+        const prompt = `
+You are a project planner. Read the user's raw transcript, remove filler words, and convert it into a concise, actionable game plan.
+Return STRICT JSON ONLY (no markdown), with:
+{"title":"...", "summary":"...", "items":["Action 1","Action 2", "..."]}
+Transcript:
+${text}`.trim();
+
+        const body = {
+          contents: [{ role:'user', parts:[{text:prompt}]}]
+        };
+        const res = await fetch('https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-pro:generateContent?key='+encodeURIComponent(key), {
+          method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify(body)
+        });
+        if(!res.ok){ console.warn('Gemini HTTP', res.status); return null; }
+        const data = await res.json();
+        const raw = (data.candidates?.[0]?.content?.parts||[]).map(p=>p.text||'').join('\n');
+        const json = extractJSON(raw);
+        return json ? JSON.parse(json) : null;
+      }catch(err){ console.warn('Gemini error', err); return null; }
+    }
+
+    function extractJSON(s){
+      const a = s.indexOf('{'); const b = s.lastIndexOf('}');
+      if(a>=0 && b>a){ return s.slice(a,b+1); }
+      return null;
+    }
+
+    function localPlanHeuristic(text){
+      const cleaned = cleanTranscript(text);
+      const sentences = cleaned.split(/[.\n;!?]+/).map(s=>s.trim()).filter(Boolean);
+      const imperatives = sentences.map(s=>{
+        // convert "I need to ..." → "Draft ..." etc. (very simple heuristics)
+        return s
+          .replace(/^i (need|should|will|want) to\s+/i,'')
+          .replace(/^we (need|should|will|want) to\s+/i,'')
+          .replace(/^\s*(let'?s|gonna|going to)\s+/i,'')
+          .replace(/^\s*I'?m\s+going to\s+/i,'')
+          .replace(/^\s*I\s+want to\s+/i,'')
+          .replace(/^\s*try to\s+/i,'')
+          .replace(/^plan to\s+/i,'')
+          .replace(/^\s*maybe\s+/i,'')
+          .replace(/^\s*just\s+/i,'')
+          .replace(/^\s*basically\s+/i,'')
+          .replace(/^\s*like\s+/i,'')
+          .replace(/^to\s+/i,'')
+          .replace(/\s+kind of\s+/gi,' ')
+          .trim();
+      }).filter(Boolean);
+
+      const items = Array.from(new Set(imperatives)).slice(0,12);
+      const title = (items[0] || 'Game Plan').split(' ').slice(0,6).join(' ');
+      const summary = sentences.slice(0,2).join('. ') || 'Concise plan generated locally.';
+      return { title, summary, items };
+    }
+
+    async function generatePlan(){
+      const text = el.transcript.value.trim();
+      if(!text){ showToast('No transcript'); return; }
+
+      el.goBtn.disabled = true; el.goBtn.textContent = '⏳ Crafting…';
+      // Prefer Gemini if key present; else local heuristic
+      const viaGemini = await maybeGeminiPlan(text);
+      const draft = viaGemini || localPlanHeuristic(text);
+
+      el.title.value = (draft.title || 'Game Plan').trim();
+      el.summary.value = (draft.summary || '').trim();
+      el.taskList.innerHTML = '';
+      (draft.items || []).forEach(addTaskItem);
+      updateProgress();
+      confettiMini(); // tiny delight when a draft appears
+      el.goBtn.disabled = false; el.goBtn.textContent = '✅ Go!';
+    }
+
+    el.goBtn.onclick = generatePlan;
+
+    function addTaskItem(text='New task'){
+      const id = crypto.randomUUID();
+      const div = document.createElement('div');
+      div.className = 'item';
+      div.draggable = true;
+      div.dataset.id = id;
+
+      const handle = document.createElement('div');
+      handle.textContent = '⠿';
+      handle.style.cursor='grab';
+      handle.style.opacity='.6';
+      handle.style.userSelect='none';
+
+      const cb = document.createElement('input');
+      cb.type = 'checkbox'; cb.onchange = updateProgress;
+
+      const p = document.createElement('div');
+      p.contentEditable = 'true';
+      p.style.flex='1';
+      p.style.minHeight='22px';
+      p.textContent = text;
+      p.oninput = ()=>{/* keep */}
+
+      const del = document.createElement('button');
+      del.className='del'; del.textContent='Delete';
+      del.onclick = ()=>{ div.remove(); updateProgress(); };
+
+      div.append(handle, cb, p, del);
+      // drag n drop
+      div.addEventListener('dragstart', e=>{
+        div.classList.add('dragging');
+        e.dataTransfer.setData('text/plain', id);
+      });
+      div.addEventListener('dragend', ()=> div.classList.remove('dragging'));
+      el.taskList.appendChild(div);
+    }
+
+    el.addItemBtn.onclick = ()=> addTaskItem('New task');
+
+    el.taskList.addEventListener('dragover', e=>{
+      e.preventDefault();
+      const dragging = el.taskList.querySelector('.dragging');
+      if(!dragging) return;
+      const after = getDragAfterElement(el.taskList, e.clientY);
+      if(after == null){ el.taskList.appendChild(dragging); }
+      else{ el.taskList.insertBefore(dragging, after); }
+    });
+
+    function getDragAfterElement(container, y){
+      const els = [...container.querySelectorAll('.item:not(.dragging)')];
+      return els.reduce((closest, child)=>{
+        const box = child.getBoundingClientRect();
+        const offset = y - box.top - box.height/2;
+        if(offset < 0 && offset > closest.offset){
+          return {offset, element: child};
+        } else { return closest; }
+      }, {offset: Number.NEGATIVE_INFINITY}).element;
+    }
+
+    function updateProgress(){
+      const items = [...el.taskList.querySelectorAll('.item')];
+      const total = items.length || 1;
+      let done = 0;
+      items.forEach(it=>{
+        const cb = it.querySelector('input[type="checkbox"]');
+        done += cb.checked ? 1 : 0;
+      });
+      const ratio = done/total;
+      el.progress.value = ratio;
+      el.progressTag.textContent = Math.round(ratio*100)+'%';
+      if(ratio === 1 && total>0) confetti();
+    }
+
+    /* =========================
+       Save / Load Plans
+    ==========================*/
+    function currentDraftToPlan(){
+      const items = [...el.taskList.querySelectorAll('.item')].map(it=>{
+        return { id: it.dataset.id, text: it.querySelector('div[contenteditable]').textContent.trim(), done: it.querySelector('input').checked };
+      }).filter(x=>x.text);
+      return {
+        id: crypto.randomUUID(),
+        date: new Date().toISOString(),
+        title: (el.title.value || 'Game Plan').trim(),
+        summary: el.summary.value.trim(),
+        items
+      };
+    }
+
+    function renderSaved(){
+      const plans = loadLocal(LS.plans, []);
+      el.savedPlans.innerHTML = '';
+      if(plans.length === 0){
+        const x = document.createElement('div'); x.className='muted';
+        x.textContent = 'No saved plans yet.';
+        el.savedPlans.appendChild(x);
+        return;
+      }
+      plans.forEach((p, idx)=>{
+        const row = document.createElement('div'); row.className='item';
+        const head = document.createElement('div');
+        head.style.display='flex'; head.style.flexDirection='column'; head.style.gap='6px'; head.style.flex='1';
+        head.innerHTML = `<b>${escapeHtml(p.title||'Game Plan')}</b>
+                          <div class="muted" style="font-size:13px">${new Date(p.date).toLocaleString()}</div>
+                          <div class="muted">${escapeHtml(p.summary||'')}</div>`;
+        const open = document.createElement('button'); open.className='btn'; open.textContent='Open →';
+        open.onclick = ()=> loadPlanIntoDraft(p);
+        const del = document.createElement('button'); del.className='btn'; del.style.background='#e5484d'; del.style.borderColor='#ff9a9d'; del.textContent='Delete';
+        del.onclick = ()=>{
+          const list = loadLocal(LS.plans, []);
+          list.splice(idx,1); saveLocal(LS.plans, list); renderSaved();
+        };
+        row.append(head, open, del);
+        el.savedPlans.appendChild(row);
+      });
+    }
+
+    function loadPlanIntoDraft(p){
+      el.title.value = p.title || 'Game Plan';
+      el.summary.value = p.summary || '';
+      el.taskList.innerHTML = '';
+      (p.items||[]).forEach(it=>{
+        addTaskItem(it.text||'');
+        const last = el.taskList.lastElementChild;
+        last.querySelector('input').checked = !!it.done;
+      });
+      updateProgress();
+      window.scrollTo({ top: document.querySelector('#demo').offsetTop - 10, behavior:'smooth' });
+    }
+
+    el.savePlanBtn.onclick = ()=>{
+      const plan = currentDraftToPlan();
+      const list = loadLocal(LS.plans, []);
+      list.unshift(plan);
+      saveLocal(LS.plans, list);
+      renderSaved();
+      showToast('Plan saved');
+    };
+    el.clearPlansBtn.onclick = ()=>{ saveLocal(LS.plans, []); renderSaved(); };
+
+    /* =========================
+       Offline Queue render
+    ==========================*/
+    function renderQueue(){
+      const q = loadLocal(LS.queue, []);
+      el.offlineQueue.innerHTML = '';
+      if(q.length === 0){
+        const x = document.createElement('div'); x.className='muted';
+        x.textContent = 'Offline queue is empty.';
+        el.offlineQueue.appendChild(x);
+        return;
+      }
+      q.forEach((e, idx)=>{
+        const row = document.createElement('div'); row.className='item';
+        const main = document.createElement('div'); main.style.flex='1';
+        main.innerHTML = `<div class="muted" style="font-size:13px">${new Date(e.date).toLocaleString()}</div>
+                          <div>${escapeHtml(e.text.slice(0,220))}${e.text.length>220?'…':''}</div>`;
+        const use = document.createElement('button'); use.className='btn'; use.textContent='Use → Draft';
+        use.onclick = ()=>{ el.transcript.value = e.text; window.location.hash='#demo'; showToast('Loaded to transcript'); };
+        const del = document.createElement('button'); del.className='btn'; del.textContent='Delete';
+        del.onclick = ()=>{
+          const list = loadLocal(LS.queue, []);
+          list.splice(idx,1); saveLocal(LS.queue, list); renderQueue();
+        };
+        row.append(main, use, del);
+        el.offlineQueue.appendChild(row);
+      });
+    }
+
+    el.processQueueBtn.onclick = ()=>{
+      const q = loadLocal(LS.queue, []);
+      if(q.length === 0){ showToast('Queue empty'); return; }
+      const first = q.shift();
+      saveLocal(LS.queue, q); renderQueue();
+      el.transcript.value = first.text;
+      generatePlan();
+    };
+    el.clearQueueBtn.onclick = ()=>{ saveLocal(LS.queue, []); renderQueue(); };
+
+    /* =========================
+       Theme + Settings
+    ==========================*/
+    el.toggleTheme.onclick = ()=>{
+      document.body.classList.toggle('light');
+      localStorage.setItem('thinktask.theme', document.body.classList.contains('light') ? 'light' : 'dark');
+    };
+    (()=>{
+      const theme = localStorage.getItem('thinktask.theme') || 'dark';
+      if(theme === 'light') document.body.classList.add('light');
+    })();
+
+    el.saveKeyBtn.onclick = ()=>{
+      const key = el.apiKey.value.trim();
+      if(!key){ showToast('No key'); return; }
+      localStorage.setItem(LS.apiKey, JSON.stringify(key));
+      showToast('Saved key locally');
+    };
+    el.clearKeyBtn.onclick = ()=>{
+      localStorage.removeItem(LS.apiKey); el.apiKey.value=''; showToast('Removed key');
+    };
+    (()=>{
+      const saved = (localStorage.getItem(LS.apiKey)||'').replace(/"/g,'');
+      if(saved) el.apiKey.value = saved;
+    })();
+
+    /* =========================
+       Confetti (tiny canvas)
+    ==========================*/
+    function confettiMini(){ confetti(60, 900); }
+    function confetti(count=160, duration=1400){
+      const c = document.createElement('canvas');
+      Object.assign(c.style, {position:'fixed', inset:'0', width:'100vw', height:'100vh', pointerEvents:'none', zIndex:90});
+      document.body.appendChild(c);
+      const ctx = c.getContext('2d');
+      const px = c.width = innerWidth * devicePixelRatio;
+      const py = c.height = innerHeight * devicePixelRatio;
+
+      const pieces = Array.from({length:count}, ()=>({
+        x: Math.random()*px, y: -Math.random()*py*.2, r: 3+Math.random()*6,
+        vx: -1+Math.random()*2, vy: 2+Math.random()*4, a: Math.random()*Math.PI*2
+      }));
+      let t0 = performance.now();
+      function tick(t){
+        const dt = t - t0; t0 = t;
+        ctx.clearRect(0,0,px,py);
+        pieces.forEach(p=>{
+          p.x += p.vx * (dt/16); p.y += p.vy * (dt/16);
+          p.a += .04;
+          ctx.save();
+          ctx.translate(p.x, p.y);
+          ctx.rotate(Math.sin(p.a));
+          ctx.fillStyle = ['#ff3b30','#1380EC','#ffd166','#4CC38A','#a78bfa','#ffffff'][p.r|0 % 6];
+          ctx.fillRect(-p.r, -p.r, p.r*2, p.r*2);
+          ctx.restore();
+        });
+        if(t - (tick.start|| (tick.start=t)) < duration) requestAnimationFrame(tick);
+        else c.remove();
+      }
+      requestAnimationFrame(tick);
+    }
+
+    /* =========================
+       Events wiring
+    ==========================*/
+    el.micBtn.onclick = ()=>{
+      if(!isRecording){ startRecording(); }
+      else{ stopRecording(); }
+    };
+    el.pauseBtn.onclick = ()=>{
+      if(!isRecording) return;
+      if(!isPaused) pauseRecording();
+      else resumeRecording();
+    };
+
+    function escapeHtml(s){ return s.replace(/[&<>"']/g, m=>({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' }[m])); }
+
+    function openPolicy(which){
+      const text = which==='privacy'
+        ? 'We store data locally in your device for the web demo. Adding an API key keeps it in localStorage. No server receives your data unless you choose to use an external API.'
+        : 'Use of ThinkTask is provided as-is. The web demo is for preview only. The iOS app may differ. By using this site you agree to keep your API keys private.';
+      alert((which==='privacy'?'Privacy':'Terms')+':\n\n'+text);
+    }
+    window.openPolicy = openPolicy;
+
+    // init
+    updateSpeechStatus();
+    renderSaved();
+    renderQueue();
+  </script>
+</body>
+</html>
