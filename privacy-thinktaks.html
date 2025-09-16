@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ThinkTask – Privacy Policy</title>
+<style>
+  :root {{
+    --bg-top: #0d1624;
+    --bg-bottom: #0a0e18;
+    --text: #eef2f6;
+    --muted: #9fb0c7;
+    --card: rgba(255,255,255,0.06);
+    --stroke: rgba(255,255,255,0.14);
+    --accent: #4ea3ff;
+  }}
+  html,body {{ height: 100%; }}
+  body {{
+    margin: 0;
+    color: var(--text);
+    background: linear-gradient(180deg, var(--bg-top), var(--bg-bottom));
+    font: 16px/1.6 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Inter, "Helvetica Neue", Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    padding: 24px;
+  }}
+  .container {{
+    max-width: 960px;
+    margin: 0 auto;
+  }}
+  header {{
+    margin: 10px 0 24px;
+  }}
+  h1 {{ font-size: 40px; margin: 0 0 10px; }}
+  h2 {{ margin: 28px 0 12px; font-size: 22px; }}
+  h3 {{ margin: 22px 0 8px; font-size: 18px; }}
+  p, li {{ color: var(--text); }}
+  .muted {{ color: var(--muted); }}
+  .card {{
+    background: var(--card);
+    border: 1px solid var(--stroke);
+    border-radius: 14px;
+    padding: 18px 18px 6px;
+    margin: 18px 0;
+  }}
+  code, .mono {{ font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }}
+  a {{ color: var(--accent); }}
+  .small {{ font-size: 14px; }}
+  .list-tight li {{ margin: 6px 0; }}
+</style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Privacy Policy</h1>
+      <p class="muted small">Last updated: {today}</p>
+      <p><strong>ThinkTask</strong> (“the App”) turns speech into an actionable checklist. This page explains what data the App handles, how it is used, and your choices. This policy is designed for the version of the App implemented in Swift Playgrounds as a single-file app using Apple Speech Recognition and the Google Generative Language (Gemini) API.</p>
+    </header>
+
+    <section class="card">
+      <h2>Summary (TL;DR)</h2>
+      <ul class="list-tight">
+        <li><strong>No accounts</strong> and no in-app registration.</li>
+        <li><strong>On-device storage only</strong> for your transcripts and plans; we (the developers) cannot access your data.</li>
+        <li><strong>Audio stays on your device</strong> for transcription; the App does <em>not</em> send audio to Google. Apple’s Speech engine may process audio on-device or via Apple’s servers depending on availability.</li>
+        <li>When you tap <span class="mono">Go!</span>, the <strong>text transcript</strong> is sent to <strong>Google’s Generative Language (Gemini) API</strong> to generate a plan.</li>
+        <li><strong>No ads</strong>, no third-party analytics, and we do not sell your data.</li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2>What the App Stores on Your Device</h2>
+      <p>Your content is saved locally inside the iOS/iPadOS app sandbox:</p>
+      <ul class="list-tight">
+        <li><strong>Transcripts you type or dictate</strong> (ephemeral in the text box unless you save or generate a plan).</li>
+        <li><strong>Offline queue entries</strong> you save manually.</li>
+        <li><strong>Game plans</strong> (title, summary, checklist, notes, original transcript).</li>
+      </ul>
+      <p>For resilience, the App writes to the <span class="mono">Documents</span> folder and mirrors to <span class="mono">Application Support</span>, plus a shadow copy in <span class="mono">UserDefaults</span>. Filenames include <span class="mono">plans.v1.json</span> and <span class="mono">savedQueue.v1.json</span>. Delete data in-app (swipe to delete / Clear All) or remove the App to erase its container.</p>
+    </section>
+
+    <section class="card">
+      <h2>Audio &amp; Speech Recognition</h2>
+      <ul class="list-tight">
+        <li>The App uses the device <strong>microphone</strong> to capture speech for live transcription.</li>
+        <li>Transcription is performed by Apple’s <span class="mono">SFSpeechRecognizer</span>. Depending on your device and language, Apple may process speech <strong>on-device</strong> or via <strong>Apple’s servers</strong>. This behavior is controlled by iOS and your settings (e.g., “Enable Dictation” and “Improve Siri &amp; Dictation”).</li>
+        <li>You may also <strong>import .m4a voice notes</strong> from Files for transcription. The App does not upload these files; they remain in your Files app and are processed through Apple’s speech framework.</li>
+        <li>The App itself does <em>not</em> retain or upload audio beyond transient processing for transcription.</li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2>AI Plan Generation (Google Gemini)</h2>
+      <ul class="list-tight">
+        <li>When you tap <strong>Go!</strong>, the App sends your <strong>text transcript</strong> (not audio) to Google’s Generative Language (Gemini) API to create a plan.</li>
+        <li>The request is made directly from your device to Google; there is no developer-operated server in between in this version.</li>
+        <li>Google processes the text to return structured steps. Processing may occur on servers outside your country. Please review Google’s applicable privacy terms for the Generative Language API.</li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2>What We <em>Do Not</em> Collect</h2>
+      <ul class="list-tight">
+        <li>No account data (name, email, phone).</li>
+        <li>No precise location, contacts, photos, or calendars.</li>
+        <li>No third-party analytics SDKs.</li>
+        <li>No advertising identifiers or ad-tracking.</li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2>Permissions</h2>
+      <ul class="list-tight">
+        <li><strong>Microphone</strong>: to capture your voice for transcription.</li>
+        <li><strong>Speech Recognition</strong>: to convert speech to text using Apple’s engine.</li>
+        <li><strong>Files &amp; Media (optional)</strong>: when you choose “Import,” to select a voice note from the Files app.</li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2>Your Choices &amp; Controls</h2>
+      <ul class="list-tight">
+        <li>Use the in-app delete actions to remove specific transcripts, offline items, or game plans.</li>
+        <li>Disable microphone or speech permissions in iOS Settings at any time.</li>
+        <li>To erase all local data, uninstall the App.</li>
+        <li>If you shared content to other apps (via the iOS share sheet), manage or delete that content within those apps.</li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2>Legal Bases (GDPR/UK GDPR)</h2>
+      <ul class="list-tight">
+        <li><strong>Consent</strong>: microphone &amp; speech recognition permissions.</li>
+        <li><strong>Performance of a contract</strong>: to provide core App features you request (transcription, plan generation, saving items).</li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2>Children’s Privacy</h2>
+      <p>The App is not directed to children under 13, and we do not knowingly collect personal data from children. If you believe a child provided personal data, please contact us so we can delete it.</p>
+    </section>
+
+    <section class="card">
+      <h2>Data Security</h2>
+      <p>Data is stored locally in the App’s sandbox on your device. iOS provides filesystem protections (e.g., encryption when a device has a passcode). Keep your device updated and secured. Because processing with Google occurs directly from your device, any internet transmission is protected by TLS; however, no internet service is completely secure.</p>
+    </section>
+
+    <section class="card">
+      <h2>Data Sharing, Sale, and Advertising</h2>
+      <ul class="list-tight">
+        <li>We do <strong>not sell</strong> your personal data.</li>
+        <li>We do <strong>not share</strong> your personal data for cross-context behavioral advertising.</li>
+        <li>Third-party processing occurs only when you request AI plan generation (Google) or transcription via Apple Speech. Those parties process your data to provide their services.</li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2>International Transfers</h2>
+      <p>Google may process the text you send to its AI service on servers located worldwide. By using the AI feature, you understand and consent to this transfer.</p>
+    </section>
+
+    <section class="card">
+      <h2>Retention</h2>
+      <p>Your data persists on your device until you delete it in-app or uninstall the App. We do not host a server copy.</p>
+    </section>
+
+    <section class="card">
+      <h2>Changes</h2>
+      <p>We may update this policy as the App evolves (e.g., if cloud sync, accounts, or analytics are added). We’ll post updates on this page and revise the “Last updated” date.</p>
+    </section>
+
+    <section class="card">
+      <h2>Contact</h2>
+      <p>Questions or requests? Email <a href="mailto:support@yourdomain.com">support@yourdomain.com</a>. If you are in the UK/EU and wish to exercise data rights (access, deletion, etc.), contact us at the same address.</p>
+    </section>
+
+    <footer class="muted small">
+      <p><em>Note:</em> This policy describes the Swift Playgrounds build shown in the App’s code: local JSON persistence, Apple Speech for transcription, and Gemini API for plan generation. If you publish a version that adds cloud services, accounts, or analytics, update this page accordingly.</p>
+    </footer>
+  </div>
+</body>
+</html>
+"""
+
+path = "/mnt/data/thinktask_privacy.html"
+with open(path, "w", encoding="utf-8") as f:
+    f.write(html)
+
+path
+
+Analyzed
+python
+Always show details
+
+Copy code
+# Recreate the HTML file after environment reset
+from datetime import datetime
+
+today = datetime.utcnow().strftime("%d %B %Y")
+html = f"""<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ThinkTask – Privacy Policy</title>
+<style>
+  :root {{
+    --bg-top: #0d1624;
+    --bg-bottom: #0a0e18;
+    --text: #eef2f6;
+    --muted: #9fb0c7;
+    --card: rgba(255,255,255,0.06);
+    --stroke: rgba(255,255,255,0.14);
+    --accent: #4ea3ff;
+  }}
+  html,body {{ height: 100%; }}
+  body {{
+    margin: 0;
+    color: var(--text);
+    background: linear-gradient(180deg, var(--bg-top), var(--bg-bottom));
+    font: 16px/1.6 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Inter, "Helvetica Neue", Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    padding: 24px;
+  }}
+  .container {{
+    max-width: 960px;
+    margin: 0 auto;
+  }}
+  header {{
+    margin: 10px 0 24px;
+  }}
+  h1 {{ font-size: 40px; margin: 0 0 10px; }}
+  h2 {{ margin: 28px 0 12px; font-size: 22px; }}
+  h3 {{ margin: 22px 0 8px; font-size: 18px; }}
+  p, li {{ color: var(--text); }}
+  .muted {{ color: var(--muted); }}
+  .card {{
+    background: var(--card);
+    border: 1px solid var(--stroke);
+    border-radius: 14px;
+    padding: 18px 18px 6px;
+    margin: 18px 0;
+  }}
+  code, .mono {{ font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }}
+  a {{ color: var(--accent); }}
+  .small {{ font-size: 14px; }}
+  .list-tight li {{ margin: 6px 0; }}
+</style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Privacy Policy</h1>
+      <p class="muted small">Last updated: {today}</p>
+      <p><strong>ThinkTask</strong> (“the App”) turns speech into an actionable checklist. This page explains what data the App handles, how it is used, and your choices. This policy is designed for the version of the App implemented in Swift Playgrounds as a single-file app using Apple Speech Recognition and the Google Generative Language (Gemini) API.</p>
+    </header>
+
+    <section class="card">
+      <h2>Summary (TL;DR)</h2>
+      <ul class="list-tight">
+        <li><strong>No accounts</strong> and no in-app registration.</li>
+        <li><strong>On-device storage only</strong> for your transcripts and plans; we (the developers) cannot access your data.</li>
+        <li><strong>Audio stays on your device</strong> for transcription; the App does <em>not</em> send audio to Google. Apple’s Speech engine may process audio on-device or via Apple’s servers depending on availability.</li>
+        <li>When you tap <span class="mono">Go!</span>, the <strong>text transcript</strong> is sent to <strong>Google’s Generative Language (Gemini) API</strong> to generate a plan.</li>
+        <li><strong>No ads</strong>, no third-party analytics, and we do not sell your data.</li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2>What the App Stores on Your Device</h2>
+      <p>Your content is saved locally inside the iOS/iPadOS app sandbox:</p>
+      <ul class="list-tight">
+        <li><strong>Transcripts you type or dictate</strong> (ephemeral in the text box unless you save or generate a plan).</li>
+        <li><strong>Offline queue entries</strong> you save manually.</li>
+        <li><strong>Game plans</strong> (title, summary, checklist, notes, original transcript).</li>
+      </ul>
+      <p>For resilience, the App writes to the <span class="mono">Documents</span> folder and mirrors to <span class="mono">Application Support</span>, plus a shadow copy in <span class="mono">UserDefaults</span>. Filenames include <span class="mono">plans.v1.json</span> and <span class="mono">savedQueue.v1.json</span>. Delete data in-app (swipe to delete / Clear All) or remove the App to erase its container.</p>
+    </section>
+
+    <section class="card">
+      <h2>Audio &amp; Speech Recognition</h2>
+      <ul class="list-tight">
+        <li>The App uses the device <strong>microphone</strong> to capture speech for live transcription.</li>
+        <li>Transcription is performed by Apple’s <span class="mono">SFSpeechRecognizer</span>. Depending on your device and language, Apple may process speech <strong>on-device</strong> or via <strong>Apple’s servers</strong>. This behavior is controlled by iOS and your settings (e.g., “Enable Dictation” and “Improve Siri &amp; Dictation”).</li>
+        <li>You may also <strong>import .m4a voice notes</strong> from Files for transcription. The App does not upload these files; they remain in your Files app and are processed through Apple’s speech framework.</li>
+        <li>The App itself does <em>not</em> retain or upload audio beyond transient processing for transcription.</li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2>AI Plan Generation (Google Gemini)</h2>
+      <ul class="list-tight">
+        <li>When you tap <strong>Go!</strong>, the App sends your <strong>text transcript</strong> (not audio) to Google’s Generative Language (Gemini) API to create a plan.</li>
+        <li>The request is made directly from your device to Google; there is no developer-operated server in between in this version.</li>
+        <li>Google processes the text to return structured steps. Processing may occur on servers outside your country. Please review Google’s applicable privacy terms for the Generative Language API.</li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2>What We <em>Do Not</em> Collect</h2>
+      <ul class="list-tight">
+        <li>No account data (name, email, phone).</li>
+        <li>No precise location, contacts, photos, or calendars.</li>
+        <li>No third-party analytics SDKs.</li>
+        <li>No advertising identifiers or ad-tracking.</li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2>Permissions</h2>
+      <ul class="list-tight">
+        <li><strong>Microphone</strong>: to capture your voice for transcription.</li>
+        <li><strong>Speech Recognition</strong>: to convert speech to text using Apple’s engine.</li>
+        <li><strong>Files &amp; Media (optional)</strong>: when you choose “Import,” to select a voice note from the Files app.</li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2>Your Choices &amp; Controls</h2>
+      <ul class="list-tight">
+        <li>Use the in-app delete actions to remove specific transcripts, offline items, or game plans.</li>
+        <li>Disable microphone or speech permissions in iOS Settings at any time.</li>
+        <li>To erase all local data, uninstall the App.</li>
+        <li>If you shared content to other apps (via the iOS share sheet), manage or delete that content within those apps.</li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2>Legal Bases (GDPR/UK GDPR)</h2>
+      <ul class="list-tight">
+        <li><strong>Consent</strong>: microphone &amp; speech recognition permissions.</li>
+        <li><strong>Performance of a contract</strong>: to provide core App features you request (transcription, plan generation, saving items).</li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2>Children’s Privacy</h2>
+      <p>The App is not directed to children under 13, and we do not knowingly collect personal data from children. If you believe a child provided personal data, please contact us so we can delete it.</p>
+    </section>
+
+    <section class="card">
+      <h2>Data Security</h2>
+      <p>Data is stored locally in the App’s sandbox on your device. iOS provides filesystem protections (e.g., encryption when a device has a passcode). Keep your device updated and secured. Because processing with Google occurs directly from your device, any internet transmission is protected by TLS; however, no internet service is completely secure.</p>
+    </section>
+
+    <section class="card">
+      <h2>Data Sharing, Sale, and Advertising</h2>
+      <ul class="list-tight">
+        <li>We do <strong>not sell</strong> your personal data.</li>
+        <li>We do <strong>not share</strong> your personal data for cross-context behavioral advertising.</li>
+        <li>Third-party processing occurs only when you request AI plan generation (Google) or transcription via Apple Speech. Those parties process your data to provide their services.</li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2>International Transfers</h2>
+      <p>Google may process the text you send to its AI service on servers located worldwide. By using the AI feature, you understand and consent to this transfer.</p>
+    </section>
+
+    <section class="card">
+      <h2>Retention</h2>
+      <p>Your data persists on your device until you delete it in-app or uninstall the App. We do not host a server copy.</p>
+    </section>
+
+    <section class="card">
+      <h2>Changes</h2>
+      <p>We may update this policy as the App evolves (e.g., if cloud sync, accounts, or analytics are added). We’ll post updates on this page and revise the “Last updated” date.</p>
+    </section>
+
+    <section class="card">
+      <h2>Contact</h2>
+      <p>Questions or requests? Email <a href="mailto:support@yourdomain.com">support@yourdomain.com</a>. If you are in the UK/EU and wish to exercise data rights (access, deletion, etc.), contact us at the same address.</p>
+    </section>
+
+    <footer class="muted small">
+      <p><em>Note:</em> This policy describes the Swift Playgrounds build shown in the App’s code: local JSON persistence, Apple Speech for transcription, and Gemini API for plan generation. If you publish a version that adds cloud services, accounts, or analytics, update this page accordingly.</p>
+    </footer>
+  </div>
+</body>
+</html>
