@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ThinkTask — Support</title>
+  <style>
+    :root{
+      --bg1:#0d1624; --bg2:#0a0e18;
+      --text:#eef2f6; --muted:#9fb0c7;
+      --card:rgba(255,255,255,.06); --stroke:rgba(255,255,255,.14);
+      --accent:#4ea3ff; --ok:#4ade80; --warn:#fbbf24;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0; color:var(--text);
+      font:16px/1.6 -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Inter,Helvetica Neue,Arial,sans-serif;
+      background:linear-gradient(180deg,var(--bg1),var(--bg2));
+      -webkit-font-smoothing:antialiased; padding:24px;
+    }
+    .container{max-width:980px;margin:0 auto}
+    header{margin:8px 0 24px}
+    h1{font-size:42px;margin:0 0 8px}
+    h2{font-size:24px;margin:26px 0 10px}
+    h3{font-size:18px;margin:18px 0 8px}
+    p,li{color:var(--text)}
+    .muted{color:var(--muted)}
+    .small{font-size:14px}
+    .card{
+      background:var(--card); border:1px solid var(--stroke);
+      border-radius:14px; padding:18px; margin:18px 0;
+    }
+    .row{display:flex; gap:14px; flex-wrap:wrap}
+    .btn{
+      display:inline-block; padding:12px 16px; border-radius:12px;
+      background:rgba(255,255,255,.12); border:1px solid var(--stroke);
+      color:var(--text); text-decoration:none; font-weight:600;
+    }
+    .btn:hover{background:rgba(255,255,255,.18)}
+    code,.mono{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}
+    a{color:var(--accent); text-decoration:none}
+    a:hover{text-decoration:underline}
+    .list-tight li{margin:6px 0}
+    footer{margin:26px 0 12px}
+    @media (max-width:640px){h1{font-size:32px} h2{font-size:20px}}
+  </style>
+</head>
+<body>
+  <div class="container">
+
+    <header>
+      <h1>ThinkTask Support</h1>
+      <p class="muted small">Last updated: 16 September 2025 • Current app version: 2.5.8</p>
+
+      <div class="row" style="margin-top:8px">
+        <!-- Email buttons with helpful prefilled subjects -->
+        <a class="btn" href="mailto:support@thinktask.com?subject=ThinkTask%20Support%20Request&body=Brief%20summary%20of%20your%20question%3A%0A%0ADevice%20model%3A%0AiOS%20version%3A%0AThinkTask%20version%3A%202.5.8%0ASteps%20to%20reproduce%20(if%20a%20bug)%3A%0AExpected%20result%3A%0AActual%20result%3A%0A">
+          Email Support
+        </a>
+        <a class="btn" href="mailto:support@thinktask.com?subject=Bug%20Report%20%28ThinkTask%202.5.8%29&body=Please%20include%20steps%20to%20reproduce%2C%20screenshots%20if%20possible%2C%20and%20any%20error%20messages.">
+          Report a Bug
+        </a>
+        <a class="btn" href="mailto:support@thinktask.com?subject=Feature%20Request%20for%20ThinkTask&body=What%20problem%20would%20this%20feature%20solve%3F%20How%20would%20you%20use%20it%3F">
+          Request a Feature
+        </a>
+        <a class="btn" href="/privacy.html">Privacy Policy</a>
+      </div>
+    </header>
+
+    <section class="card">
+      <h2>Quick answers</h2>
+      <h3>Minimum requirements</h3>
+      <ul class="list-tight">
+        <li>iOS/iPadOS 16 or later recommended</li>
+        <li>Microphone &amp; Speech Recognition permissions enabled</li>
+        <li>Internet for AI “Go!” (Gemini); offline speech depends on iOS language packs</li>
+      </ul>
+
+      <h3>Where is my data stored?</h3>
+      <p>On your device only. Transcripts, Saved items, and Game Plans are saved in the app’s sandbox (Documents &amp; Application Support). There is no developer cloud for your content.</p>
+
+      <h3>How do I delete my data?</h3>
+      <ul class="list-tight">
+        <li>Swipe to delete individual items in <em>Saved</em> or <em>Game Plans</em>.</li>
+        <li>Use “Clear All” in <em>Saved</em> to remove queued transcripts.</li>
+        <li>Uninstalling the app removes all data in the container.</li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2>Troubleshooting</h2>
+
+      <h3>“Tap to record” doesn’t capture my voice</h3>
+      <ul class="list-tight">
+        <li>Open <strong>iOS Settings → Privacy &amp; Security → Microphone</strong> and enable ThinkTask.</li>
+        <li>Open <strong>Settings → Siri &amp; Search → Siri &amp; Dictation</strong> and ensure Dictation is allowed (if using offline packs).</li>
+        <li>Close other apps using the mic (voice memos, calls) and try again.</li>
+      </ul>
+
+      <h3>No transcript appears / Pauses randomly</h3>
+      <ul class="list-tight">
+        <li>Check <strong>Settings → Privacy → Speech Recognition</strong> and allow ThinkTask.</li>
+        <li>Some locales require network for speech; if offline, try enabling <strong>Enable Dictation</strong> in <strong>Settings → General → Keyboard</strong>.</li>
+        <li>If it stalls, tap Stop then Start again. You can also <em>Import</em> a voice note (.m4a) from Files.</li>
+      </ul>
+
+      <h3>“Go!” is disabled or AI fails</h3>
+      <ul class="list-tight">
+        <li>“Go!” requires an internet connection (Gemini).</li>
+        <li>If you’re offline, tap <strong>Save</strong> to queue the transcript and run “Go!” later.</li>
+        <li>If an error appears, copy it and email us with the steps to reproduce.</li>
+      </ul>
+
+      <h3>Import fails</h3>
+      <ul class="list-tight">
+        <li>Supported format: <code>.m4a</code> (MPEG-4 audio). Try re-exporting the file or placing it in iCloud Drive/On My iPhone first.</li>
+        <li>Very long files may take time to transcribe; keep the app in the foreground.</li>
+      </ul>
+
+      <h3>Confetti sound not playing</h3>
+      <ul class="list-tight">
+        <li>Ensure your device is not muted; increase volume. The app uses the <em>ambient</em> category and will mix with other audio.</li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2>How to contact us</h2>
+      <p>Email: <a href="mailto:support@thinktask.com">support@thinktask.com</a></p>
+      <p class="muted small">Typical response time: within 2 business days (Mon–Fri).</p>
+      <h3>Helpful details to include</h3>
+      <ul class="list-tight">
+        <li>Device model (e.g., iPhone 14 Pro), iOS version, and ThinkTask version (2.5.8)</li>
+        <li>What you were trying to do, and exact steps to reproduce</li>
+        <li>Screenshots or a short screen recording (if possible)</li>
+        <li>Any error message text</li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2>Policies</h2>
+      <p>See our <a href="/privacy.html">Privacy Policy</a> for data handling details and your choices.</p>
+    </section>
+
+    <footer class="muted small">
+      <p>© ThinkTask. All rights reserved.</p>
+    </footer>
+
+  </div>
+</body>
+</html>
