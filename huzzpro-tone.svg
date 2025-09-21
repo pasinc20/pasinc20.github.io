@@ -1,0 +1,46 @@
+<svg width="1200" height="900" viewBox="0 0 1200 900" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="1200" y1="0" x2="0" y2="900" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#182949" />
+      <stop offset="1" stop-color="#060A17" />
+    </linearGradient>
+    <linearGradient id="frame" x1="0" y1="0" x2="0" y2="1">
+      <stop stop-color="#111D34" />
+      <stop offset="1" stop-color="#0A1324" />
+    </linearGradient>
+    <linearGradient id="highlight" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#7AA7FF" />
+      <stop offset="1" stop-color="#7DF8D5" />
+    </linearGradient>
+    <filter id="shadow" x="240" y="110" width="720" height="680" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feDropShadow dx="0" dy="32" stdDeviation="52" flood-color="#01040A" flood-opacity="0.65" />
+    </filter>
+  </defs>
+  <rect width="1200" height="900" rx="48" fill="url(#bg)" />
+  <g opacity="0.5">
+    <circle cx="260" cy="220" r="190" fill="#1C2F57" />
+    <circle cx="940" cy="680" r="200" fill="#142442" />
+    <circle cx="920" cy="200" r="150" fill="#1B335E" />
+  </g>
+  <g filter="url(#shadow)">
+    <rect x="300" y="160" width="600" height="560" rx="52" fill="url(#frame)" stroke="rgba(255,255,255,0.08)" stroke-width="2" />
+    <rect x="330" y="198" width="540" height="492" rx="36" fill="#060A16" />
+    <rect x="330" y="198" width="540" height="104" rx="36" fill="#111C30" />
+    <text x="360" y="258" fill="#F7F9FF" font-size="24" font-family="'Inter', 'Segoe UI', sans-serif" font-weight="700">Tone controls</text>
+    <text x="360" y="288" fill="#7D8CB2" font-size="15" font-family="'Inter', 'Segoe UI', sans-serif">Dial in the vibe before you hit send.</text>
+    <rect x="360" y="324" width="480" height="118" rx="24" fill="#101A2E" stroke="rgba(122,167,255,0.35)" stroke-width="1.5" />
+    <text x="386" y="360" fill="#9AA4C0" font-size="14" font-family="'Inter', 'Segoe UI', sans-serif">CURRENT VIBE</text>
+    <text x="386" y="390" fill="#F7F9FF" font-size="22" font-family="'Inter', 'Segoe UI', sans-serif" font-weight="600">Warm · Balanced</text>
+    <rect x="386" y="406" width="300" height="12" rx="6" fill="#14233F" />
+    <rect x="386" y="406" width="188" height="12" rx="6" fill="url(#highlight)" />
+    <circle cx="572" cy="412" r="14" fill="#0E1628" stroke="#7AA7FF" stroke-width="3" />
+    <text x="386" y="438" fill="#7F8DB2" font-size="14" font-family="'Inter', 'Segoe UI', sans-serif">Keeps it flirty with a touch of reassurance.</text>
+    <rect x="360" y="460" width="480" height="86" rx="22" fill="#0E172D" />
+    <text x="386" y="502" fill="#F7F9FF" font-size="18" font-family="'Inter', 'Segoe UI', sans-serif">↺ Try it bolder</text>
+    <text x="562" y="502" fill="#7DF8D5" font-size="16" font-family="'Inter', 'Segoe UI', sans-serif">Adds playful challenge</text>
+    <rect x="360" y="564" width="220" height="48" rx="16" fill="#131F36" />
+    <text x="388" y="595" fill="#9AA4C0" font-size="16" font-family="'Inter', 'Segoe UI', sans-serif">Save as favourite</text>
+    <rect x="584" y="564" width="256" height="48" rx="16" fill="url(#highlight)" />
+    <text x="618" y="595" fill="#061126" font-size="17" font-family="'Inter', 'Segoe UI', sans-serif" font-weight="600">Apply tone to reply</text>
+  </g>
+</svg>
