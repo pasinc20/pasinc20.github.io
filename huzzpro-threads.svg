@@ -1,0 +1,62 @@
+<svg width="1200" height="900" viewBox="0 0 1200 900" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="1200" y1="0" x2="0" y2="900" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#172A4D" />
+      <stop offset="1" stop-color="#050912" />
+    </linearGradient>
+    <linearGradient id="frame" x1="0" y1="0" x2="0" y2="1">
+      <stop stop-color="#101C31" />
+      <stop offset="1" stop-color="#0A1323" />
+    </linearGradient>
+    <linearGradient id="accent" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#7AA7FF" />
+      <stop offset="1" stop-color="#7DF8D5" />
+    </linearGradient>
+    <filter id="shadow" x="246" y="108" width="708" height="704" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feDropShadow dx="0" dy="30" stdDeviation="52" flood-color="#01040A" flood-opacity="0.68" />
+    </filter>
+  </defs>
+  <rect width="1200" height="900" rx="48" fill="url(#bg)" />
+  <g opacity="0.5">
+    <circle cx="250" cy="220" r="190" fill="#1C2E55" />
+    <circle cx="950" cy="690" r="220" fill="#15223B" />
+    <circle cx="920" cy="200" r="150" fill="#1A3056" />
+  </g>
+  <g filter="url(#shadow)">
+    <rect x="306" y="160" width="588" height="560" rx="50" fill="url(#frame)" stroke="rgba(255,255,255,0.1)" stroke-width="2" />
+    <rect x="334" y="198" width="532" height="492" rx="36" fill="#050911" />
+    <rect x="334" y="198" width="532" height="108" rx="36" fill="#101A2F" />
+    <text x="364" y="256" fill="#F7F9FF" font-size="24" font-family="'Inter', 'Segoe UI', sans-serif" font-weight="700">Threads</text>
+    <text x="364" y="288" fill="#7F8CB2" font-size="15" font-family="'Inter', 'Segoe UI', sans-serif">All your conversations in one tidy place.</text>
+    <g>
+      <rect x="364" y="324" width="472" height="68" rx="20" fill="#111C30" />
+      <circle cx="404" cy="358" r="18" fill="#192943" />
+      <text x="432" y="350" fill="#F7F9FF" font-size="18" font-family="'Inter', 'Segoe UI', sans-serif">Jess</text>
+      <text x="432" y="372" fill="#7F8CB2" font-size="14" font-family="'Inter', 'Segoe UI', sans-serif">Planning rooftop drinks · 2m ago</text>
+      <rect x="768" y="342" width="48" height="28" rx="14" fill="url(#accent)" />
+      <text x="782" y="362" fill="#061126" font-size="14" font-family="'Inter', 'Segoe UI', sans-serif" font-weight="600">AI</text>
+    </g>
+    <g opacity="0.92">
+      <rect x="364" y="402" width="472" height="68" rx="20" fill="#0C1324" />
+      <circle cx="404" cy="436" r="18" fill="#192943" />
+      <text x="432" y="428" fill="#F7F9FF" font-size="18" font-family="'Inter', 'Segoe UI', sans-serif">Team AMA</text>
+      <text x="432" y="450" fill="#7F8CB2" font-size="14" font-family="'Inter', 'Segoe UI', sans-serif">Follow-up draft sent · 12m ago</text>
+    </g>
+    <g opacity="0.85">
+      <rect x="364" y="480" width="472" height="68" rx="20" fill="#0A1120" />
+      <circle cx="404" cy="514" r="18" fill="#192943" />
+      <text x="432" y="506" fill="#F7F9FF" font-size="18" font-family="'Inter', 'Segoe UI', sans-serif">Hinge — Alex</text>
+      <text x="432" y="528" fill="#7F8CB2" font-size="14" font-family="'Inter', 'Segoe UI', sans-serif">Saved reply · 1h ago</text>
+    </g>
+    <g opacity="0.75">
+      <rect x="364" y="558" width="472" height="68" rx="20" fill="#080E1C" />
+      <circle cx="404" cy="592" r="18" fill="#192943" />
+      <text x="432" y="584" fill="#F7F9FF" font-size="18" font-family="'Inter', 'Segoe UI', sans-serif">Investor intro</text>
+      <text x="432" y="606" fill="#7F8CB2" font-size="14" font-family="'Inter', 'Segoe UI', sans-serif">Draft ready · yesterday</text>
+    </g>
+    <rect x="364" y="648" width="224" height="48" rx="16" fill="#131F36" />
+    <text x="392" y="679" fill="#9AA4C0" font-size="16" font-family="'Inter', 'Segoe UI', sans-serif">Filter by vibe</text>
+    <rect x="608" y="648" width="228" height="48" rx="16" fill="url(#accent)" />
+    <text x="642" y="679" fill="#061126" font-size="16" font-family="'Inter', 'Segoe UI', sans-serif" font-weight="600">Start new thread</text>
+  </g>
+</svg>

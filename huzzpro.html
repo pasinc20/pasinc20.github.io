@@ -2,126 +2,895 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <title>Huzz Pro — Your AI Conversation Wingman</title>
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <meta name="description" content="Huzz Pro is your AI wingman for smarter, smoother messages. Get context-aware replies in seconds." />
+  <title>Huzz Pro — AI Wingman for Witty Conversations</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Huzz Pro is the AI conversation wingman that helps you launch, steer, and close every chat with confidence." />
   <link rel="icon" href="subsly.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
-    :root{
-      --bg:#0b0d12; --panel:#0f1219; --card:#111522; --border:rgba(255,255,255,0.08);
-      --text:#e7e9ee; --muted:#a9b0bd; --primary:#6ea8fe; --accent:#7af0c0;
-      --radius:18px; --shadow:0 12px 30px rgba(0,0,0,.35);
-      --grad: radial-gradient(900px 500px at 80% -10%, rgba(110,168,254,.22), transparent 60%),
-              radial-gradient(700px 420px at -10% 0%, rgba(122,240,192,.18), transparent 55%);
+    :root {
+      --bg: #030611;
+      --panel: rgba(11, 16, 32, 0.82);
+      --card: rgba(12, 18, 36, 0.92);
+      --card-soft: rgba(18, 26, 48, 0.7);
+      --border: rgba(255, 255, 255, 0.08);
+      --text: #f7f9ff;
+      --muted: #9aa4c0;
+      --primary: #7aa7ff;
+      --primary-dark: #5075f2;
+      --accent: #7df8d5;
+      --radius-lg: 24px;
+      --radius-md: 18px;
+      --radius-sm: 12px;
+      --shadow-lg: 0 28px 60px rgba(3, 8, 24, 0.45);
+      --shadow-md: 0 16px 35px rgba(3, 8, 24, 0.35);
+      --gradient: radial-gradient(1100px 820px at 90% -5%, rgba(122, 167, 255, 0.25), transparent 60%),
+                  radial-gradient(950px 720px at -10% -15%, rgba(125, 248, 213, 0.2), transparent 60%),
+                  #030611;
     }
-    @media (prefers-color-scheme: light){
-      :root{
-        --bg:#f7f9fc; --panel:#fff; --card:#fff; --border:rgba(10,16,30,.08);
-        --text:#121620; --muted:#4d5568; --shadow:0 12px 30px rgba(10,16,30,.08);
-        --grad: radial-gradient(900px 500px at 80% -10%, rgba(110,168,254,.16), transparent 60%),
-                radial-gradient(700px 420px at -10% 0%, rgba(122,240,192,.12), transparent 55%);
+
+    @media (prefers-color-scheme: light) {
+      :root {
+        --bg: #f7f8ff;
+        --panel: rgba(255, 255, 255, 0.85);
+        --card: rgba(255, 255, 255, 0.95);
+        --card-soft: rgba(249, 250, 255, 0.9);
+        --border: rgba(6, 16, 52, 0.09);
+        --text: #101223;
+        --muted: #525a72;
+        --primary: #3f6bff;
+        --primary-dark: #284dcc;
+        --accent: #1fb994;
+        --gradient: radial-gradient(1100px 820px at 95% -8%, rgba(63, 107, 255, 0.16), transparent 60%),
+                    radial-gradient(960px 620px at -8% -12%, rgba(31, 185, 148, 0.16), transparent 60%),
+                    #f7f8ff;
+        --shadow-lg: 0 28px 60px rgba(12, 22, 56, 0.18);
+        --shadow-md: 0 16px 35px rgba(12, 22, 56, 0.12);
       }
     }
-    *{box-sizing:border-box} html,body{height:100%}
-    body{margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;background:var(--bg);color:var(--text);letter-spacing:.01em}
-    img{max-width:100%;display:block}
-    .wrap{min-height:100dvh;display:grid;grid-template-rows:auto 1fr auto;background:var(--grad),var(--bg)}
 
-    header{position:sticky;top:0;z-index:10;background:color-mix(in oklab, var(--panel) 85%, transparent);border-bottom:1px solid var(--border);backdrop-filter:blur(8px)}
-    .nav{max-width:1100px;margin:0 auto;padding:14px 16px;display:flex;align-items:center;justify-content:space-between;gap:12px}
-    .brand{display:inline-flex;gap:10px;align-items:center;text-decoration:none;color:var(--text)}
-    .brand-img{width:28px;height:28px;border-radius:6px;box-shadow:var(--shadow)}
-    .btn{appearance:none;border:1px solid var(--border);background:var(--card);color:var(--text);padding:10px 14px;border-radius:12px;font-weight:600;text-decoration:none;cursor:pointer;transition:transform .15s ease,border-color .15s ease}
-    .btn:hover{transform:translateY(-1px);border-color:color-mix(in oklab, var(--primary), #fff 12%)}
-    .btn.primary{background:linear-gradient(180deg, color-mix(in oklab, var(--primary), #fff 15%), var(--primary));border-color:transparent;color:#0a0f16}
+    * {
+      box-sizing: border-box;
+    }
 
-    .hero{max-width:1100px;margin:24px auto 0;padding:22px 16px;display:grid;grid-template-columns:1fr;gap:18px;align-items:center}
-    @media(min-width:920px){.hero{grid-template-columns:420px 1fr}}
-    .card{background:color-mix(in oklab, var(--card) 92%, transparent);border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden}
-    .app{display:grid;grid-template-columns:auto 1fr;gap:14px;padding:16px}
-    .icon{width:120px;height:120px;border-radius:24px;overflow:hidden;box-shadow:var(--shadow);flex:0 0 auto}
-    h1{margin:0 0 6px;font-size:clamp(26px,5vw,40px);letter-spacing:-.02em}
-    .sub{margin:0;color:var(--muted);font-size:clamp(14px,2.8vw,18px)}
-    .meta{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
-    .pill{border:1px solid var(--border);padding:6px 10px;border-radius:999px;background:color-mix(in oklab, var(--panel) 85%, transparent);color:var(--muted);font-size:13px}
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+      font-size: 16px;
+      line-height: 1.6;
+      background: var(--gradient);
+      color: var(--text);
+    }
 
-    .section{max-width:1100px;margin:16px auto 0;padding:0 16px 34px}
-    .gallery{display:grid;grid-template-columns:1fr;gap:12px}
-    @media(min-width:760px){.gallery{grid-template-columns:1fr 1fr}}
-    .shot{height:260px;border:1px solid var(--border);border-radius:16px;overflow:hidden;background:#0d111a}
-    @media(min-width:760px){.shot{height:320px}}
-    .features{display:grid;gap:10px;margin:0;padding:0 0 0 18px;color:var(--muted);line-height:1.6}
-    .actions{padding:14px 16px;border-top:1px solid var(--border);display:flex;flex-wrap:wrap;gap:10px;background:color-mix(in oklab, var(--panel) 90%, transparent)}
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    a {
+      color: inherit;
+    }
+
+    .page {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      backdrop-filter: blur(14px);
+      background: var(--panel);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 16px clamp(16px, 4vw, 32px);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 17px;
+    }
+
+    .brand img {
+      width: 32px;
+      height: 32px;
+      border-radius: 10px;
+      box-shadow: var(--shadow-md);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      appearance: none;
+      border: 1px solid var(--border);
+      background: var(--card);
+      color: inherit;
+      padding: 10px 16px;
+      border-radius: var(--radius-sm);
+      font-weight: 600;
+      text-decoration: none;
+      font-size: 15px;
+      line-height: 1.3;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+      cursor: pointer;
+    }
+
+    .btn:hover {
+      transform: translateY(-1px);
+      border-color: rgba(255, 255, 255, 0.18);
+      box-shadow: var(--shadow-md);
+    }
+
+    .btn.primary {
+      background: linear-gradient(155deg, var(--primary), var(--primary-dark));
+      color: #050810;
+      border-color: transparent;
+      box-shadow: var(--shadow-md);
+    }
+
+    .btn.ghost {
+      background: rgba(255, 255, 255, 0.05);
+    }
+
+    main {
+      flex: 1;
+    }
+
+    section {
+      padding: clamp(48px, 12vw, 96px) clamp(16px, 6vw, 32px);
+    }
+
+    .section-inner {
+      max-width: 1120px;
+      margin: 0 auto;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 12px;
+      border-radius: 999px;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      background: rgba(122, 167, 255, 0.16);
+      color: var(--primary);
+    }
+
+    .hero {
+      position: relative;
+      padding-top: clamp(72px, 14vw, 120px);
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: clamp(12px, 4vw, 40px);
+      border-radius: clamp(24px, 6vw, 48px);
+      background: rgba(122, 167, 255, 0.09);
+      filter: blur(0);
+      z-index: -1;
+      opacity: 0.4;
+    }
+
+    .hero-grid {
+      display: grid;
+      gap: clamp(32px, 6vw, 64px);
+    }
+
+    @media (min-width: 960px) {
+      .hero-grid {
+        grid-template-columns: minmax(0, 520px) minmax(0, 1fr);
+        align-items: center;
+      }
+    }
+
+    h1 {
+      font-size: clamp(32px, 6vw, 54px);
+      line-height: 1.05;
+      letter-spacing: -0.03em;
+      margin: 12px 0 18px;
+    }
+
+    .lead {
+      font-size: clamp(18px, 3.5vw, 20px);
+      color: var(--muted);
+      margin-bottom: clamp(20px, 6vw, 32px);
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 22px;
+    }
+
+    .badge-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 12px;
+      border-radius: 999px;
+      background: var(--card-soft);
+      border: 1px solid var(--border);
+    }
+
+    .hero-visual {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .hero-visual::before,
+    .hero-visual::after {
+      content: '';
+      position: absolute;
+      border-radius: 50%;
+      background: rgba(122, 248, 213, 0.15);
+      filter: blur(0);
+      z-index: -2;
+    }
+
+    .hero-visual::before {
+      width: clamp(220px, 40vw, 340px);
+      height: clamp(220px, 40vw, 340px);
+      opacity: 0.6;
+    }
+
+    .hero-visual::after {
+      width: clamp(320px, 55vw, 420px);
+      height: clamp(320px, 55vw, 420px);
+      opacity: 0.35;
+    }
+
+    .device-frame {
+      background: var(--card);
+      padding: clamp(18px, 4vw, 28px);
+      border-radius: 36px;
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow-lg);
+      max-width: 420px;
+      width: 100%;
+    }
+
+    .device-frame img {
+      border-radius: clamp(20px, 4vw, 28px);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+    }
+
+    .stats-grid {
+      display: grid;
+      gap: 18px;
+      margin-top: clamp(32px, 6vw, 48px);
+    }
+
+    @media (min-width: 720px) {
+      .stats-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+    }
+
+    .stat {
+      background: var(--card-soft);
+      border-radius: var(--radius-md);
+      padding: 22px;
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow-md);
+    }
+
+    .stat strong {
+      display: block;
+      font-size: clamp(26px, 4vw, 36px);
+      margin-bottom: 6px;
+      letter-spacing: -0.02em;
+    }
+
+    .section-title {
+      font-size: clamp(28px, 5vw, 40px);
+      letter-spacing: -0.02em;
+      margin-bottom: 18px;
+    }
+
+    .section-lead {
+      font-size: 18px;
+      color: var(--muted);
+      margin-bottom: clamp(24px, 6vw, 40px);
+      max-width: 640px;
+    }
+
+    .feature-grid {
+      display: grid;
+      gap: 18px;
+    }
+
+    @media (min-width: 900px) {
+      .feature-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+    }
+
+    .feature-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 28px;
+      box-shadow: var(--shadow-md);
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    .feature-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 14px;
+      background: rgba(122, 167, 255, 0.16);
+      color: var(--primary);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      font-weight: 600;
+    }
+
+    .feature-card h3 {
+      margin: 0;
+      font-size: 20px;
+    }
+
+    .feature-card p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 15px;
+    }
+
+    .feature-card ul {
+      margin: 0;
+      padding-left: 18px;
+      color: var(--muted);
+      font-size: 15px;
+      display: grid;
+      gap: 6px;
+    }
+
+    .steps {
+      background: linear-gradient(135deg, rgba(122, 167, 255, 0.18), rgba(125, 248, 213, 0.14));
+      border-radius: var(--radius-lg);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      padding: clamp(28px, 7vw, 48px);
+      box-shadow: var(--shadow-md);
+    }
+
+    .step-list {
+      display: grid;
+      gap: 22px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .step {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 16px;
+      align-items: start;
+    }
+
+    .step-number {
+      width: 44px;
+      height: 44px;
+      border-radius: 14px;
+      background: rgba(5, 8, 18, 0.5);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 18px;
+      border: 1px solid rgba(255, 255, 255, 0.24);
+    }
+
+    .step strong {
+      display: block;
+      font-size: 18px;
+    }
+
+    .step span {
+      color: var(--muted);
+      font-size: 15px;
+    }
+
+    .gallery-grid {
+      display: grid;
+      gap: 18px;
+    }
+
+    @media (min-width: 780px) {
+      .gallery-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    .shot {
+      position: relative;
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border);
+      overflow: hidden;
+      background: var(--card);
+      box-shadow: var(--shadow-md);
+    }
+
+    .shot img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .shot figcaption {
+      position: absolute;
+      inset: auto 18px 18px;
+      padding: 12px 16px;
+      border-radius: 14px;
+      background: rgba(5, 8, 18, 0.72);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      font-size: 14px;
+      color: #f7f9ff;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .integrations {
+      display: grid;
+      gap: 16px;
+      margin-top: clamp(16px, 4vw, 32px);
+    }
+
+    @media (min-width: 700px) {
+      .integrations {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+    }
+
+    .integration-card {
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border);
+      padding: 22px;
+      background: var(--card);
+      box-shadow: var(--shadow-md);
+      display: grid;
+      gap: 8px;
+    }
+
+    .integration-card span {
+      font-size: 14px;
+      color: var(--muted);
+    }
+
+    .testimonials {
+      display: grid;
+      gap: 18px;
+    }
+
+    @media (min-width: 780px) {
+      .testimonials {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+    }
+
+    blockquote {
+      margin: 0;
+      background: var(--card);
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border);
+      padding: 24px;
+      display: grid;
+      gap: 12px;
+      box-shadow: var(--shadow-md);
+    }
+
+    blockquote p {
+      margin: 0;
+      font-size: 16px;
+    }
+
+    blockquote cite {
+      font-style: normal;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .faq {
+      display: grid;
+      gap: 14px;
+      margin-top: clamp(24px, 6vw, 40px);
+    }
+
+    details {
+      background: var(--card);
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border);
+      padding: 18px 22px;
+      box-shadow: var(--shadow-md);
+    }
+
+    summary {
+      cursor: pointer;
+      font-weight: 600;
+      list-style: none;
+    }
+
+    summary::-webkit-details-marker {
+      display: none;
+    }
+
+    details[open] summary {
+      color: var(--primary);
+    }
+
+    details p {
+      margin: 12px 0 0;
+      color: var(--muted);
+      font-size: 15px;
+    }
+
+    .cta {
+      text-align: center;
+      padding: clamp(64px, 14vw, 110px) clamp(16px, 6vw, 32px);
+    }
+
+    .cta-box {
+      max-width: 760px;
+      margin: 0 auto;
+      background: linear-gradient(135deg, rgba(122, 167, 255, 0.26), rgba(125, 248, 213, 0.26));
+      border-radius: 36px;
+      padding: clamp(36px, 8vw, 64px);
+      border: 1px solid rgba(255, 255, 255, 0.28);
+      box-shadow: var(--shadow-lg);
+      display: grid;
+      gap: 18px;
+    }
+
+    .cta-box h2 {
+      margin: 0;
+      font-size: clamp(30px, 6vw, 44px);
+      letter-spacing: -0.02em;
+    }
+
+    .cta-box p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 18px;
+    }
+
+    .cta-actions {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    footer {
+      padding: 24px clamp(16px, 6vw, 32px) 40px;
+      border-top: 1px solid var(--border);
+      background: rgba(3, 6, 17, 0.85);
+    }
+
+    .footer-inner {
+      max-width: 1120px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    @media (min-width: 640px) {
+      .footer-inner {
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+      }
+    }
+
+    .footer-brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .footer-brand img {
+      width: 30px;
+      height: 30px;
+      border-radius: 10px;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      font-size: 14px;
+      color: var(--muted);
+    }
+
+    .footer-links a {
+      text-decoration: none;
+      transition: color 0.18s ease;
+    }
+
+    .footer-links a:hover {
+      color: var(--text);
+    }
   </style>
 </head>
 <body>
-  <div class="wrap">
+  <div class="page">
     <header>
-      <nav class="nav">
-        <a class="brand" href="/"><img class="brand-img" src="subsly.png" alt="Subsly logo"></a>
-        <div style="display:flex;gap:8px;flex-wrap:wrap">
-          <a class="btn" href="huzzpro.html">Huzz Pro</a>
-          <a class="btn" href="nova.html">Nova Companion</a>
+      <nav class="nav" aria-label="Primary">
+        <a class="brand" href="/">
+          <img src="subsly.png" alt="Subsly logo">
+          <span>Subsly Studio</span>
+        </a>
+        <div class="nav-links">
+          <a class="btn ghost" href="huzzpro.html" aria-current="page">Huzz Pro</a>
+          <a class="btn ghost" href="nova.html">Nova Companion</a>
+          <a class="btn ghost" href="thinktask.html">ThinkTask</a>
+          <a class="btn primary" href="https://apps.apple.com/gb/app/huzz-pro/id6747211112">Download</a>
         </div>
       </nav>
     </header>
 
     <main>
-      <!-- App header -->
       <section class="hero">
-        <div class="card">
-          <div class="app">
-            <div class="icon">
-              <img src="huzzpro.png" alt="Huzz Pro app icon">
+        <div class="section-inner hero-grid">
+          <div>
+            <span class="eyebrow">AI Wingman</span>
+            <h1>Meet Huzz Pro — your fastest way to send smart, charming replies.</h1>
+            <p class="lead">Paste a conversation or snap a screenshot and Huzz Pro drafts spot-on responses that sound like you. Switch tones, remix openers, and keep the chat flowing without breaking stride.</p>
+            <div class="hero-actions">
+              <a class="btn primary" href="https://apps.apple.com/gb/app/huzz-pro/id6747211112">Download on the App Store</a>
+              <a class="btn" href="contact.html">Talk to support</a>
             </div>
-            <div>
-              <h1>Huzz Pro</h1>
-              <p class="sub">Your AI conversation wingman — fast, witty, and context-aware.</p>
-              <div class="meta">
-                <span class="pill">Free</span>
-                <span class="pill">iPhone • iPad • Mac</span>
-                <span class="pill">17+</span>
+            <div class="badge-row" aria-label="Supported platforms">
+              <span class="badge">iPhone · iPad · Mac</span>
+              <span class="badge">Free to get started</span>
+              <span class="badge">Private & secure</span>
+            </div>
+            <div class="stats-grid">
+              <div class="stat">
+                <strong>8× faster</strong>
+                <span>than typing every message from scratch.</span>
               </div>
-              <div class="actions" style="margin-top:12px">
-                <a class="btn primary" href="https://apps.apple.com/gb/app/huzz-pro/id6747211112">Download on the App Store</a>
-                <a class="btn" href="contact.html">Support</a>
+              <div class="stat">
+                <strong>3 tones</strong>
+                <span>Witty, Warm, or Bold — swap with a tap.</span>
+              </div>
+              <div class="stat">
+                <strong>24/7</strong>
+                <span>Ready for dates, deals, and everything in between.</span>
               </div>
             </div>
           </div>
-        </div>
-
-        <!-- Summary -->
-        <div class="card" style="padding:16px">
-          <h2 style="margin:6px 0 10px;letter-spacing:-.01em">Why Huzz Pro?</h2>
-          <ul class="features">
-            <li><strong>Instant, context-aware replies:</strong> paste or screenshot chats; get smart suggestions in seconds.</li>
-            <li><strong>Vibe control:</strong> Casual, Witty, or Bold — tune it to match your style.</li>
-            <li><strong>Works with bios & images:</strong> craft openings and follow-ups that land.</li>
-            <li><strong>Privacy-first:</strong> you’re in control of your data.</li>
-          </ul>
+          <div class="hero-visual" aria-hidden="true">
+            <div class="device-frame">
+              <img src="huzzpro-conversation.svg" alt="Huzz Pro composing a clever reply">
+            </div>
+          </div>
         </div>
       </section>
 
-      <!-- Screenshots (placeholders) -->
-      <section class="section">
-        <div class="gallery">
-          <figure class="shot"><img src="IMG.png" alt="Huzz Pro screenshot placeholder 1"></figure>
-          <figure class="shot"><img src="IMG.png" alt="Huzz Pro screenshot placeholder 2"></figure>
-          <figure class="shot"><img src="IMG.png" alt="Huzz Pro screenshot placeholder 3"></figure>
-          <figure class="shot"><img src="IMG.png" alt="Huzz Pro screenshot placeholder 4"></figure>
+      <section>
+        <div class="section-inner">
+          <h2 class="section-title">Built for the rhythm of real conversations</h2>
+          <p class="section-lead">Huzz Pro keeps you quick on the draw. From dating app banter to closing leads, the AI wingman understands context, vibes, and images to craft replies that land.</p>
+          <div class="feature-grid">
+            <div class="feature-card">
+              <span class="feature-icon">⚡</span>
+              <div>
+                <h3>Instant context</h3>
+                <p>Drop in screenshots or paste whole chats. Huzz Pro reads the room, tracks who said what, and generates the next best move.</p>
+              </div>
+              <ul>
+                <li>Understands screenshots and text</li>
+                <li>Calls out important cues</li>
+                <li>Keeps tone and intent aligned</li>
+              </ul>
+            </div>
+            <div class="feature-card">
+              <span class="feature-icon">🎯</span>
+              <div>
+                <h3>Wingman-level timing</h3>
+                <p>No more overthinking the opener or the follow-up. Choose your vibe, personalize, and send in seconds.</p>
+              </div>
+              <ul>
+                <li>Witty, Warm, or Bold templates</li>
+                <li>Rewrite or expand with one tap</li>
+                <li>Autofill details from bios & prompts</li>
+              </ul>
+            </div>
+            <div class="feature-card">
+              <span class="feature-icon">🛡️</span>
+              <div>
+                <h3>Private by design</h3>
+                <p>You decide what stays. Huzz Pro keeps everything on your device and lets you wipe history anytime.</p>
+              </div>
+              <ul>
+                <li>On-device drafts & history</li>
+                <li>Secure CloudKit sync</li>
+                <li>Clear conversations instantly</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <div class="section-inner">
+          <div class="steps">
+            <h2 class="section-title">Three steps to effortless replies</h2>
+            <ol class="step-list">
+              <li class="step">
+                <div class="step-number">1</div>
+                <div>
+                  <strong>Share the moment</strong>
+                  <span>Paste the chat, upload a screenshot, or import a profile bio. Huzz Pro captures the context instantly.</span>
+                </div>
+              </li>
+              <li class="step">
+                <div class="step-number">2</div>
+                <div>
+                  <strong>Pick the vibe</strong>
+                  <span>Switch from Witty to Warm or Bold. Tweak key details, add inside jokes, and let the AI do the rest.</span>
+                </div>
+              </li>
+              <li class="step">
+                <div class="step-number">3</div>
+                <div>
+                  <strong>Send with confidence</strong>
+                  <span>Tap to copy, share to any app, or save your favourite lines for later. Your wingman’s on standby.</span>
+                </div>
+              </li>
+            </ol>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <div class="section-inner">
+          <h2 class="section-title">Screenshots from the cockpit</h2>
+          <p class="section-lead">Take a peek at the tools that keep you ready for every opening line, comeback, or closing move.</p>
+          <div class="gallery-grid">
+            <figure class="shot">
+              <img src="huzzpro-suggestions.svg" alt="Smart reply suggestions inside Huzz Pro">
+              <figcaption>Smart replies in three styles</figcaption>
+            </figure>
+            <figure class="shot">
+              <img src="huzzpro-tone.svg" alt="Tone controls for responses">
+              <figcaption>Fine-tune tone & delivery</figcaption>
+            </figure>
+            <figure class="shot">
+              <img src="huzzpro-profile.svg" alt="Profile insights pulled into a conversation">
+              <figcaption>Pull insights from bios</figcaption>
+            </figure>
+            <figure class="shot">
+              <img src="huzzpro-threads.svg" alt="Conversation threads organized in Huzz Pro">
+              <figcaption>Keep every thread organized</figcaption>
+            </figure>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <div class="section-inner">
+          <h2 class="section-title">Works wherever you wing it</h2>
+          <p class="section-lead">Huzz Pro plugs into the way you already communicate. Draft from the share sheet, jump into your keyboard, or stay inside the app — your wingman follows.</p>
+          <div class="integrations">
+            <div class="integration-card">
+              <strong>Share Sheet</strong>
+              <span>Send screenshots from Hinge, Instagram, WhatsApp, iMessage, and more.</span>
+            </div>
+            <div class="integration-card">
+              <strong>Keyboard extension</strong>
+              <span>Summon Huzz Pro inside any chat app with a single long press.</span>
+            </div>
+            <div class="integration-card">
+              <strong>Mac & iPad</strong>
+              <span>Sync drafts across devices with CloudKit and pick up where you left off.</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <div class="section-inner">
+          <h2 class="section-title">Loved by people who live in the DMs</h2>
+          <p class="section-lead">From dating coaches to busy founders, Huzz Pro keeps the conversation alive without sacrificing authenticity.</p>
+          <div class="testimonials">
+            <blockquote>
+              <p>“It’s like having a charming friend draft every reply. I still sound like me, just quicker and sharper.”</p>
+              <cite>— Naomi, photographer & dating coach</cite>
+            </blockquote>
+            <blockquote>
+              <p>“I move between Instagram, iMessage, and email all day. Huzz Pro keeps context straight across every thread.”</p>
+              <cite>— Taylor, creative director</cite>
+            </blockquote>
+            <blockquote>
+              <p>“The tone presets are clutch. I can go from playful banter to professional follow-ups without overthinking it.”</p>
+              <cite>— Malik, startup founder</cite>
+            </blockquote>
+          </div>
+          <div class="faq">
+            <details>
+              <summary>How does Huzz Pro keep my conversations private?</summary>
+              <p>Your drafts stay on your device and sync securely with iCloud when you opt in. Clear your history anytime — nothing is stored without your say.</p>
+            </details>
+            <details>
+              <summary>Can I customize the tone beyond the presets?</summary>
+              <p>Absolutely. Start with Witty, Warm, or Bold, then tweak keywords, add prompts, or ask Huzz Pro to rewrite until it sounds just right.</p>
+            </details>
+            <details>
+              <summary>Does it work with images and bios?</summary>
+              <p>Yes! Snap a screenshot or import a profile. Huzz Pro reads the visual cues, extracts highlights, and suggests conversation starters.</p>
+            </details>
+          </div>
+        </div>
+      </section>
+
+      <section class="cta">
+        <div class="cta-box">
+          <h2>Ready to text with confidence?</h2>
+          <p>Install Huzz Pro and keep your AI wingman just a tap away. Draft smarter replies, close more loops, and have more fun along the way.</p>
+          <div class="cta-actions">
+            <a class="btn primary" href="https://apps.apple.com/gb/app/huzz-pro/id6747211112">Get Huzz Pro</a>
+            <a class="btn" href="privacy.html">Review privacy policy</a>
+          </div>
         </div>
       </section>
     </main>
 
     <footer>
-      <div class="foot">
-        <div class="brand-foot">
-          <img src="subsly.png" alt="Subsly logo"><span>© <span id="year"></span></span>
+      <div class="footer-inner">
+        <div class="footer-brand">
+          <img src="subsly.png" alt="Subsly logo">
+          <span>© <span id="year"></span> Subsly Studio</span>
         </div>
-        <div class="links">
+        <div class="footer-links">
           <a href="contact.html">Contact</a>
           <a href="privacy.html">Privacy</a>
           <a href="terms.html">Terms</a>
@@ -131,6 +900,6 @@
     </footer>
   </div>
 
-  <script>document.getElementById('year').textContent=new Date().getFullYear()</script>
+  <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
 </body>
 </html>
