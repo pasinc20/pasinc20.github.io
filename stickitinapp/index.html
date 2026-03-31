@@ -1,0 +1,249 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>StickItInApp — Power Management That Hits Different</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="description" content="StickItInApp is the ultimate charger-sound and battery utility. Personalize your charging experience with custom sounds, real-time velocity analytics, and proactive 80% health protection." />
+  <link rel="icon" href="../subsly.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#05070c;
+      --bg-soft:#0b1a20;
+      --card:rgba(18,37,33,0.92);
+      --panel:rgba(8,20,17,0.72);
+      --border:rgba(122,255,214,0.18);
+      --border-strong:rgba(150,255,225,0.35);
+      --text:#f4fff9;
+      --muted:#98c8bc;
+      --accent:#73f0c9;
+      --accent-hot:#6ea8fe;
+      --accent-soft:#23685e;
+      --radius:22px;
+      --shadow:0 32px 80px rgba(2,18,15,0.55);
+      --font:"Inter",-apple-system,BlinkMacSystemFont,"SF Pro Text","Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    }
+    @media (prefers-color-scheme: light){
+      :root{
+        --bg:#f5fffb;
+        --bg-soft:#ffffff;
+        --card:rgba(255,255,255,0.96);
+        --panel:rgba(240,252,248,0.92);
+        --border:rgba(58,155,130,0.18);
+        --border-strong:rgba(58,155,130,0.32);
+        --text:#0d2019;
+        --muted:#558071;
+        --accent:#0f9f76;
+        --accent-hot:#3756e5;
+        --accent-soft:#e7fffa;
+        --shadow:0 22px 60px rgba(10,70,55,0.18);
+      }
+    }
+    *{box-sizing:border-box;margin:0;padding:0}
+    html,body{height:100%}
+    body{
+      font-family:var(--font);
+      background:radial-gradient(1400px 1000px at 72% -10%,rgba(115,240,201,0.24),transparent 60%),
+                 radial-gradient(1200px 780px at 5% -20%,rgba(82,163,255,0.18),transparent 58%),
+                 linear-gradient(180deg,var(--bg),var(--bg-soft));
+      color:var(--text);
+      -webkit-font-smoothing:antialiased;
+      letter-spacing:.01em;
+    }
+    a{color:inherit;text-decoration:none}
+    img{display:block;max-width:100%;height:auto}
+    .page{min-height:100vh;display:grid;grid-template-rows:auto 1fr auto}
+
+    header.top{
+      position:sticky;top:0;z-index:50;
+      backdrop-filter:saturate(1.2) blur(16px);
+      background:color-mix(in oklab, var(--panel) 88%, transparent);
+      border-bottom:1px solid var(--border);
+    }
+    .top-inner{
+      max-width:1120px;margin:0 auto;padding:14px 18px;
+      display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;
+    }
+    .brand{
+      display:inline-flex;align-items:center;gap:12px;font-weight:700;font-size:1rem;
+      background:color-mix(in srgb, var(--accent-soft) 55%, transparent);
+      padding:6px 12px;border-radius:999px;border:1px solid var(--border);
+    }
+    .brand img{width:28px;height:28px;border-radius:8px;box-shadow:var(--shadow)}
+    .nav-links{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+    .nav-links a{
+      display:inline-flex;align-items:center;gap:6px;padding:10px 14px;border-radius:12px;
+      border:1px solid transparent;color:var(--muted);font-weight:500;font-size:.92rem;
+      transition:.2s ease;
+    }
+    .nav-links a:hover{color:var(--text);border-color:var(--border)}
+    .nav-links .primary-link{color:var(--text);background:linear-gradient(180deg,color-mix(in oklab,var(--accent),#fff 18%),var(--accent));border-color:transparent;font-weight:600}
+    .nav-links .primary-link:hover{transform:translateY(-1px)}
+
+    main{display:block}
+    section{padding:clamp(3rem,5vw,5rem) 1.5rem}
+    .container{max-width:1120px;margin:0 auto}
+
+    .hero{padding-top:clamp(3rem,7vw,6rem)}
+    .hero-inner{display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(2rem,5vw,3.6rem);align-items:center}
+    @media(max-width:940px){.hero-inner{grid-template-columns:1fr}}
+    .eyebrow{display:inline-flex;align-items:center;gap:8px;padding:6px 12px;border-radius:999px;border:1px solid var(--border);
+      background:rgba(115,240,201,0.12);color:var(--accent);font-size:.75rem;font-weight:600;text-transform:uppercase;letter-spacing:.08em}
+    h1{font-size:clamp(2.4rem,5vw,3.6rem);line-height:1.05;margin:18px 0 14px;font-weight:800;letter-spacing:-0.02em}
+    .hero p.lede{font-size:clamp(1.05rem,2.6vw,1.25rem);color:var(--muted);max-width:48ch;line-height:1.6}
+    .hero-cta{margin-top:22px;display:flex;gap:12px;flex-wrap:wrap}
+    .btn{
+      display:inline-flex;align-items:center;justify-content:center;gap:8px;
+      padding:12px 18px;border-radius:14px;font-weight:600;font-size:1rem;
+      border:1px solid var(--border);background:rgba(255,255,255,0.02);color:var(--text);
+      cursor:pointer;transition:.2s ease;
+    }
+    .btn:hover{border-color:var(--border-strong);transform:translateY(-1px)}
+    .btn.primary{background:linear-gradient(180deg,color-mix(in oklab,var(--accent),#fff 18%),var(--accent));
+      color:#050c0a;border-color:transparent;box-shadow:0 18px 40px rgba(115,240,201,0.35)}
+    .btn.ghost{background:transparent;color:var(--muted)}
+    .meta-row{margin-top:22px;display:flex;flex-wrap:wrap;gap:14px;color:var(--muted);font-size:.9rem}
+    .meta-row span{display:inline-flex;align-items:center;gap:6px;padding:8px 12px;border-radius:999px;background:rgba(255,255,255,0.05);border:1px solid var(--border)}
+
+    .device{
+      position:relative;border-radius:34px;padding:22px;
+      background:linear-gradient(180deg,#0f172a,rgba(8,20,15,0.95));
+      border:1px solid rgba(115,240,201,0.25);box-shadow:var(--shadow);max-width:420px;justify-self:end;
+    }
+    @media(max-width:940px){.device{justify-self:center}}
+    .notch{position:absolute;top:14px;left:50%;transform:translateX(-50%);width:160px;height:30px;border-radius:16px;background:#000000cc}
+    .screen{position:relative;margin-top:36px;border-radius:26px;background:linear-gradient(200deg,#131a2e,#091814);
+      border:1px solid rgba(115,240,201,0.22);padding:24px 20px 28px;display:flex;flex-direction:column;gap:16px}
+    .screen-header{display:flex;align-items:center;gap:10px;font-weight:600}
+    .screen-header img{width:32px;height:32px;border-radius:12px}
+    .bubble{padding:14px 16px;border-radius:18px;max-width:280px;font-size:.95rem;line-height:1.5}
+    .bubble.bot{align-self:flex-start;background:rgba(115,240,201,0.16);border:1px solid rgba(115,240,201,0.3)}
+    .bubble.user{align-self:flex-end;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.1)}
+    
+    .section-heading{font-size:clamp(1.9rem,4vw,2.6rem);letter-spacing:-0.01em;margin-bottom:18px;font-weight:700}
+    .muted{color:var(--muted)}
+
+    .features-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:22px;margin-top:32px}
+    .feature-card{
+      padding:22px;border-radius:18px;background:color-mix(in oklab,var(--card) 92%, transparent);
+      border:1px solid var(--border);box-shadow:0 18px 40px rgba(6,22,15,0.24);display:flex;flex-direction:column;gap:12px;
+    }
+    .feature-card h3{font-size:1.1rem}
+    .feature-card p{color:var(--muted);font-size:.96rem;line-height:1.6}
+
+    .pricing-card{margin-top:28px;padding:32px;border-radius:24px;background:linear-gradient(200deg,rgba(15,39,33,0.92),rgba(9,22,18,0.92));border:1px solid rgba(115,240,201,0.32);box-shadow:var(--shadow);display:grid;gap:20px;max-width:720px}
+    .price-tag{font-size:2.4rem;font-weight:800;letter-spacing:-0.02em}
+    .pricing-card ul{list-style:none;display:grid;gap:10px;color:var(--muted);font-size:.98rem}
+    .pricing-card li{display:flex;gap:10px;align-items:flex-start}
+    .pricing-card li svg{width:20px;height:20px;flex-shrink:0;margin-top:2px;stroke:var(--accent);stroke-width:2;fill:none}
+
+    footer{border-top:1px solid var(--border);background:color-mix(in oklab,var(--panel) 90%, transparent)}
+    .foot-inner{max-width:1120px;margin:0 auto;padding:20px 18px;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;color:var(--muted);font-size:.9rem}
+    .foot-brand{display:inline-flex;align-items:center;gap:10px}
+    .foot-brand img{width:24px;height:24px;border-radius:6px}
+    .foot-links{display:flex;gap:14px;flex-wrap:wrap}
+    .foot-links a{color:var(--muted);border-bottom:1px dashed transparent}
+    .foot-links a:hover{color:var(--text);border-color:var(--border)}
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header class="top">
+      <div class="top-inner">
+        <a class="brand" href="/"><img src="../subsly.png" alt="Subsly logo"><span>StickItInApp</span></a>
+        <nav class="nav-links" aria-label="Primary">
+          <a href="#features">Features</a>
+          <a href="#how">How it works</a>
+          <a href="privacy.html">Privacy</a>
+          <a href="support.html">Support</a>
+          <a class="primary-link" href="#">Coming Soon</a>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero" id="top">
+        <div class="container hero-inner">
+          <div class="hero-copy">
+            <span class="eyebrow">Power that hits different</span>
+            <h1>Reimagine your charging ritual.</h1>
+            <p class="lede">StickItInApp is the ultimate iOS power-management suite. Custom sounds on connection, real-time velocity analytics, and proactive health alerts — all in one premium interface.</p>
+            <div class="hero-cta">
+              <a class="btn primary" href="#">Get StickItInApp</a>
+              <a class="btn ghost" href="#features">See features</a>
+            </div>
+          </div>
+          <div class="device">
+            <div class="notch"></div>
+            <div class="screen">
+              <div class="screen-header">
+                <img src="../stickitinapp.png" alt="StickItInApp icon">
+                <div>
+                  <strong>StickItInApp</strong>
+                  <div class="muted" style="font-size:.8rem">Active Status • 82% ⚡️</div>
+                </div>
+              </div>
+              <div class="bubble bot">🔌 Charger Connected! Playing your custom 'Electric Glow' sound...</div>
+              <div class="bubble bot">📈 Velocity: +1.2% per minute. 80% Health Limit reached in 14m.</div>
+              <div class="bubble user">🛡️ Active Protection engaged.</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="features">
+        <div class="container">
+          <h2 class="section-heading">Built for power users</h2>
+          <div class="features-grid">
+            <article class="feature-card">
+              <h3>Custom Connections</h3>
+              <p>Link your favorite sounds to any charger connection. Choose factory presets or upload your own .wav files.</p>
+            </article>
+            <article class="feature-card">
+              <h3>Real-Time Velocity</h3>
+              <p>Track your charging speed in real-time. Know exactly how fast your device is gaining power with live dashboard metrics.</p>
+            </article>
+            <article class="feature-card">
+              <h3>Active Protection</h3>
+              <p>Preserve your battery health by staying in the 20-80% sweet spot. Get notified the second you hit your peak limit.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="pricing">
+        <div class="container">
+          <h2 class="section-heading">Proactive Health</h2>
+          <div class="pricing-card">
+            <div>
+              <div class="price-tag">StickItInApp Pro</div>
+              <p class="muted">Lifetime access to the ultimate power suite. No recurring fees.</p>
+            </div>
+            <ul>
+              <li><svg viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg>Unlimited custom sounds</li>
+              <li><svg viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg>Detailed health tracking & history</li>
+              <li><svg viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg>Priority 80% Protection alerts</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div class="foot-inner">
+        <div class="foot-brand">
+          <img src="../subsly.png" alt="Subsly logo">
+          <span>© 2026 StickItInApp</span>
+        </div>
+        <div class="foot-links">
+          <a href="privacy.html">Privacy</a>
+          <a href="support.html">Support</a>
+        </div>
+      </div>
+    </footer>
+  </div>
+</body>
+</html>
