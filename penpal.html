@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Penpal AI - Personal AI Companion</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="description" content="Penpal AI is a personal AI companion for chat, voice notes, images, memory, and custom instructions." />
+  <link rel="icon" href="penpal.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root{--bg:#070a0f;--panel:#111722;--card:#151d2a;--line:rgba(255,255,255,.1);--text:#f5f7fb;--muted:#a9b3c7;--primary:#72d5c7;--hot:#ffcf70;--radius:18px;--shadow:0 24px 70px rgba(0,0,0,.35)}
+    @media(prefers-color-scheme:light){:root{--bg:#f6f9fb;--panel:#fff;--card:#fff;--line:rgba(18,26,38,.1);--text:#101620;--muted:#596579;--shadow:0 18px 50px rgba(22,40,70,.13)}}
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;background:radial-gradient(900px 560px at 80% -10%,rgba(114,213,199,.24),transparent 60%),radial-gradient(760px 480px at 10% 0%,rgba(255,207,112,.16),transparent 55%),var(--bg);color:var(--text);line-height:1.6;-webkit-font-smoothing:antialiased}
+    a{color:inherit;text-decoration:none}
+    img{display:block;max-width:100%;height:auto}
+    header{position:sticky;top:0;z-index:20;background:color-mix(in oklab,var(--panel) 88%,transparent);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+    .nav{max-width:1120px;margin:0 auto;padding:14px 18px;display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+    .brand{display:flex;align-items:center;gap:10px;font-weight:800}
+    .brand img{width:30px;height:30px;border-radius:8px}
+    .links{display:flex;gap:10px;flex-wrap:wrap}
+    .links a,.btn{border:1px solid var(--line);border-radius:12px;padding:10px 14px;font-weight:600;color:var(--muted)}
+    .links a:hover,.btn:hover{color:var(--text);border-color:color-mix(in oklab,var(--primary),#fff 20%)}
+    .btn.primary{background:linear-gradient(180deg,color-mix(in oklab,var(--primary),#fff 20%),var(--primary));color:#06100f;border-color:transparent;box-shadow:0 16px 36px rgba(114,213,199,.28)}
+    section{padding:clamp(3rem,6vw,5.5rem) 1.5rem}
+    .container{max-width:1120px;margin:0 auto}
+    .hero{display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(2rem,5vw,4rem);align-items:center}
+    @media(max-width:900px){.hero{grid-template-columns:1fr}}
+    .eyebrow{display:inline-flex;border:1px solid var(--line);border-radius:999px;padding:6px 12px;color:var(--hot);font-size:.78rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;background:rgba(255,207,112,.08)}
+    h1{font-size:clamp(2.4rem,5.5vw,4rem);line-height:1.02;letter-spacing:-.03em;margin:18px 0 14px}
+    .lede{font-size:clamp(1.05rem,2.5vw,1.24rem);color:var(--muted);max-width:54ch}
+    .actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:24px}
+    .meta{display:flex;gap:10px;flex-wrap:wrap;margin-top:20px;color:var(--muted);font-size:.92rem}
+    .meta span{border:1px solid var(--line);border-radius:999px;padding:8px 12px;background:rgba(255,255,255,.04)}
+    .phone{border:1px solid color-mix(in oklab,var(--primary),#fff 10%);background:linear-gradient(180deg,#182233,#0d131c);border-radius:34px;padding:22px;box-shadow:var(--shadow);max-width:420px;justify-self:end}
+    @media(max-width:900px){.phone{justify-self:center}}
+    .screen{border:1px solid var(--line);border-radius:26px;background:#0c111a;padding:22px;display:grid;gap:14px}
+    .screen-head{display:flex;align-items:center;gap:10px}
+    .screen-head img{width:36px;height:36px;border-radius:10px}
+    .bubble{padding:14px 16px;border-radius:18px;max-width:310px}
+    .bubble.user{justify-self:end;background:rgba(255,255,255,.08);border:1px solid var(--line)}
+    .bubble.ai{background:rgba(114,213,199,.14);border:1px solid rgba(114,213,199,.28)}
+    .voice{display:flex;align-items:center;gap:10px;color:var(--primary);font-weight:700}
+    .bars{display:flex;align-items:end;gap:3px;height:28px}
+    .bars i{display:block;width:4px;border-radius:4px;background:var(--primary)}
+    .bars i:nth-child(1){height:12px}.bars i:nth-child(2){height:22px}.bars i:nth-child(3){height:15px}.bars i:nth-child(4){height:26px}.bars i:nth-child(5){height:18px}
+    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:18px;margin-top:30px}
+    .card{background:color-mix(in oklab,var(--card) 94%,transparent);border:1px solid var(--line);border-radius:18px;padding:22px;box-shadow:0 14px 38px rgba(0,0,0,.16)}
+    .card h3{font-size:1.08rem;margin-bottom:8px}.card p{color:var(--muted)}
+    .pricing{max-width:760px;background:linear-gradient(180deg,color-mix(in oklab,var(--card),#fff 3%),var(--card));border:1px solid color-mix(in oklab,var(--primary),#fff 8%);border-radius:22px;padding:28px;margin-top:28px;box-shadow:var(--shadow)}
+    .plans{display:grid;gap:12px;margin-top:18px}
+    .plan{display:grid;grid-template-columns:1fr auto;gap:10px;align-items:center;border:1px solid var(--line);border-radius:14px;padding:14px}
+    .plan strong{display:block}.plan span{color:var(--muted);font-size:.92rem}.price{font-weight:800;color:var(--hot)}
+    footer{border-top:1px solid var(--line);background:color-mix(in oklab,var(--panel) 90%,transparent)}
+    .foot{max-width:1120px;margin:0 auto;padding:20px 18px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;color:var(--muted);font-size:.92rem}
+    .foot a{color:var(--muted)}
+  </style>
+</head>
+<body>
+  <header>
+    <nav class="nav">
+      <a class="brand" href="/"><img src="penpal.png" alt="Penpal AI icon"><span>Penpal AI</span></a>
+      <div class="links">
+        <a href="#features">Features</a>
+        <a href="#pricing">Pricing</a>
+        <a href="/penpal/privacy.html">Privacy</a>
+        <a href="/penpal/terms.html">Terms</a>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <section>
+      <div class="container hero">
+        <div>
+          <span class="eyebrow">AI companion</span>
+          <h1>A companion that remembers the details.</h1>
+          <p class="lede">Penpal AI brings together natural chat, custom instructions, memories, image generation, and occasional voice notes so every conversation feels personal.</p>
+          <div class="actions">
+            <a class="btn primary" href="#pricing">See plans</a>
+            <a class="btn" href="/penpal/subscriptions.html">Subscription terms</a>
+          </div>
+          <div class="meta">
+            <span>Free plan available</span>
+            <span>Weekly subscriptions</span>
+            <span>Consumable boosts</span>
+          </div>
+        </div>
+        <div class="phone" aria-label="Penpal conversation preview">
+          <div class="screen">
+            <div class="screen-head"><img src="penpal.png" alt=""><div><strong>Penpal</strong><div style="color:var(--muted);font-size:.86rem">Memory on - voice ready</div></div></div>
+            <div class="bubble user">Remember my preferred writing style and help me plan tonight.</div>
+            <div class="bubble ai">I have it. I will keep things warm, concise, and practical. For tonight, start with the message you want to send.</div>
+            <div class="bubble ai voice"><span>Voice note</span><span class="bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="features">
+      <div class="container">
+        <h2>Made for personal AI chat</h2>
+        <div class="grid">
+          <article class="card"><h3>Custom instructions</h3><p>Set the tone, language, relationship style, and boundaries for the assistant.</p></article>
+          <article class="card"><h3>Memory and imports</h3><p>Use saved context and imported history to keep long-running conversations coherent.</p></article>
+          <article class="card"><h3>Image generation</h3><p>Create and edit images with plan-based allowances and optional image boosts.</p></article>
+          <article class="card"><h3>Voice notes and calls</h3><p>Receive occasional generated voice notes and use separate voice credits for live calls.</p></article>
+          <article class="card"><h3>Model choice</h3><p>Choose supported cloud models and voices from inside the app settings.</p></article>
+          <article class="card"><h3>Clear controls</h3><p>Manage purchases, restore access, clear instructions, and delete your account from settings.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section id="pricing">
+      <div class="container">
+        <h2>Plans and boosts</h2>
+        <p class="lede">Subscriptions renew weekly until cancelled. Boosts and voice credits are one-time consumable purchases and do not start a subscription.</p>
+        <div class="pricing">
+          <div class="plans">
+            <div class="plan"><div><strong>Penpal AI Starter Weekly</strong><span>15,000 premium tokens/day, 2 images/day, 1 import/month.</span></div><div class="price">&pound;4.99/week</div></div>
+            <div class="plan"><div><strong>Penpal AI Plus Weekly</strong><span>40,000 premium tokens/day, 5 images/day, 3 imports/month.</span></div><div class="price">&pound;9.99/week</div></div>
+            <div class="plan"><div><strong>Penpal AI Pro Weekly</strong><span>100,000 premium tokens/day, 10 images/day, 10 imports/month.</span></div><div class="price">&pound;19.99/week</div></div>
+          </div>
+          <p style="color:var(--muted);margin-top:16px">Payment is charged to your Apple ID. Subscriptions automatically renew unless cancelled at least 24 hours before the end of the current period. Manage or cancel in Settings &gt; Apple ID &gt; Subscriptions.</p>
+          <div class="actions">
+            <a class="btn primary" href="/penpal/subscriptions.html">Full subscription terms</a>
+            <a class="btn" href="/penpal/support.html">Support</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="foot">
+      <span>&copy; <span id="year"></span> Subsly</span>
+      <div class="links">
+        <a href="/penpal/support.html">Support</a>
+        <a href="/penpal/privacy.html">Privacy</a>
+        <a href="/penpal/terms.html">Terms</a>
+        <a href="/penpal/subscriptions.html">Subscription Terms</a>
+      </div>
+    </div>
+  </footer>
+  <script>document.getElementById('year').textContent=new Date().getFullYear()</script>
+</body>
+</html>
