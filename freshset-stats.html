@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Freshset – Live subscriptions</title>
+<meta name="description" content="Live counters for Freshset free trials, payments and cancellations, fed by App Store Server Notifications.">
+<meta name="theme-color" content="#0B0B14">
+<meta name="robots" content="noindex">
+<style>
+:root{
+  --bg:#0B0B14; --fg:#ffffff;
+  --accent:#8B5CFF; --accent2:#E04DFF;
+  --radius:14px;   --max-w:1120px;
+  --nav-h:64px;
+  --muted:rgba(255,255,255,.58);
+  --faint:rgba(255,255,255,.34);
+  --card:rgba(255,255,255,.045);
+  --line:rgba(255,255,255,.09);
+  --ff:-apple-system,BlinkMacSystemFont,Inter,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+  font-family:var(--ff);
+  background:var(--bg);color:var(--fg);
+  -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;
+  padding-top:var(--nav-h);
+}
+img,svg{max-width:100%;display:block}
+a{color:inherit}
+
+.top-nav{
+  position:fixed;top:0;left:0;right:0;height:var(--nav-h);z-index:50;
+  display:flex;align-items:center;gap:1.5rem;padding:0 1.5rem;
+  background:rgba(11,11,20,.82);backdrop-filter:blur(14px);
+  border-bottom:1px solid var(--line);
+}
+.logo{height:30px;width:auto}
+.nav-links{display:flex;gap:1.4rem;margin-left:auto;font-size:.9rem}
+.nav-links a{color:var(--muted);text-decoration:none;transition:color .15s}
+.nav-links a:hover{color:#fff}
+.burger{display:none}
+
+.wrap{max-width:var(--max-w);margin:0 auto;padding:3.5rem 1.5rem 5rem}
+
+.head{display:flex;align-items:flex-start;gap:1rem;flex-wrap:wrap;margin-bottom:.6rem}
+h1{font-size:clamp(1.9rem,4vw,2.6rem);letter-spacing:-.02em;font-weight:700}
+.sub{color:var(--muted);font-size:1rem;line-height:1.6;max-width:62ch;margin-bottom:2.6rem}
+
+.status{
+  display:inline-flex;align-items:center;gap:.5rem;
+  font-size:.8rem;color:var(--muted);
+  border:1px solid var(--line);border-radius:999px;
+  padding:.35rem .8rem;white-space:nowrap;
+}
+.dot{width:8px;height:8px;border-radius:50%;background:#33D69F;flex:none}
+.dot.live{animation:pulse 2s ease-in-out infinite}
+.dot.stale{background:#E0A24D;animation:none}
+.dot.down{background:#E05D5D;animation:none}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.35}}
+
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1.1rem}
+.card{
+  background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+  padding:1.6rem 1.5rem 1.4rem;position:relative;overflow:hidden;
+}
+.card::before{
+  content:"";position:absolute;inset:0 0 auto 0;height:2px;
+  background:linear-gradient(90deg,var(--accent),var(--accent2));
+  opacity:.7;
+}
+.card.flash{animation:flash .9s ease-out}
+@keyframes flash{0%{background:rgba(139,92,255,.22)}100%{background:var(--card)}}
+
+.label{
+  font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--faint);margin-bottom:.85rem;
+}
+.value{
+  font-size:clamp(2.6rem,7vw,3.4rem);font-weight:700;
+  letter-spacing:-.03em;line-height:1;font-variant-numeric:tabular-nums;
+}
+.note{color:var(--muted);font-size:.86rem;line-height:1.55;margin-top:.75rem}
+
+.footnote{
+  margin-top:2.8rem;padding-top:1.6rem;border-top:1px solid var(--line);
+  color:var(--faint);font-size:.84rem;line-height:1.7;max-width:70ch;
+}
+.footnote strong{color:var(--muted);font-weight:600}
+
+@media(max-width:720px){
+  .nav-links{display:none}
+  .wrap{padding-top:2.5rem}
+}
+</style>
+</head>
+<body>
+<nav class="top-nav" role="navigation">
+  <a href="/" aria-label="Subsfan home"><img src="logo.png" alt="" class="logo"></a>
+  <div class="nav-links">
+    <a href="index.html">All apps</a>
+    <a href="freshset.html">Freshset</a>
+    <a href="terms-freshset.html">Terms &amp; Conditions</a>
+    <a href="privacy-freshset.html">Privacy Policy</a>
+  </div>
+  <button class="burger" id="burger" aria-label="Menu"><span></span><span></span><span></span></button>
+</nav>
+
+<main class="wrap">
+  <div class="head">
+    <h1>Freshset subscriptions</h1>
+    <span class="status" id="status"><span class="dot" id="dot"></span><span id="statusText">Connecting…</span></span>
+  </div>
+  <p class="sub">
+    Live counts from Apple, delivered the moment a subscription event happens rather than
+    waiting for the next day's sales report. Aggregate totals only — no customer information
+    passes through here, and Freshset has no accounts to identify anyone by.
+  </p>
+
+  <section class="grid">
+    <div class="card" id="card-trials">
+      <div class="label">Free trials started</div>
+      <div class="value" id="trials">–</div>
+      <div class="note">First-time subscribers who began the three-day trial.</div>
+    </div>
+    <div class="card" id="card-paid">
+      <div class="label">Payments taken</div>
+      <div class="value" id="paid">–</div>
+      <div class="note">Every successful charge: trials converting, weekly renewals, and anyone who subscribed without a trial.</div>
+    </div>
+    <div class="card" id="card-cancels">
+      <div class="label">Auto-renew turned off</div>
+      <div class="value" id="cancels">–</div>
+      <div class="note">Cancellations, counted the moment they happen — usually well before the subscription actually lapses.</div>
+    </div>
+  </section>
+
+  <p class="footnote">
+    <strong>How this works.</strong> Apple sends an App&nbsp;Store Server Notification to the Freshset
+    relay within seconds of each event. Every notification is verified against Apple's own
+    certificate chain before it is counted, so the numbers cannot be inflated by anyone who
+    finds the endpoint. Sandbox and TestFlight purchases are counted separately and never
+    appear here. Counters started at zero when this page went up, so they are a running total
+    from that point, not lifetime figures.
+  </p>
+</main>
+
+<script>
+const ENDPOINT = "https://getnailed-relay.ambitiousrock-442271a1.eastus2.azurecontainerapps.io/stats";
+const FIELDS = ["trials", "paid", "cancels"];
+const shown = {};
+let failures = 0;
+
+function setStatus(state, text) {
+  document.getElementById("dot").className = "dot " + state;
+  document.getElementById("statusText").textContent = text;
+}
+
+function relative(iso) {
+  if (!iso) return "no events yet";
+  const secs = Math.max(0, (Date.now() - Date.parse(iso)) / 1000);
+  if (secs < 60) return "last event just now";
+  if (secs < 3600) return `last event ${Math.floor(secs / 60)}m ago`;
+  if (secs < 86400) return `last event ${Math.floor(secs / 3600)}h ago`;
+  return `last event ${Math.floor(secs / 86400)}d ago`;
+}
+
+async function poll() {
+  try {
+    const res = await fetch(ENDPOINT, { cache: "no-store" });
+    if (!res.ok) throw new Error(res.status);
+    const data = await res.json();
+    failures = 0;
+
+    for (const key of FIELDS) {
+      const value = Number(data[key] || 0);
+      const el = document.getElementById(key);
+      // Only flash on a real change, and never on the first paint.
+      if (shown[key] !== undefined && value !== shown[key]) {
+        const card = document.getElementById("card-" + key);
+        card.classList.remove("flash");
+        void card.offsetWidth;
+        card.classList.add("flash");
+      }
+      shown[key] = value;
+      el.textContent = value.toLocaleString();
+    }
+    setStatus("live", relative(data.updatedAt));
+  } catch (e) {
+    // One miss is a blip; several in a row is worth showing.
+    if (++failures >= 3) setStatus("down", "Can't reach the relay");
+    else setStatus("stale", "Reconnecting…");
+  }
+}
+
+poll();
+setInterval(poll, 15000);
+document.addEventListener("visibilitychange", () => { if (!document.hidden) poll(); });
+</script>
+</body>
+</html>
