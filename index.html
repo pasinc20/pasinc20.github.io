@@ -1,266 +1,279 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <title>Penpal AI, Huzz Pro & Nova Companion</title>
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <meta name="description" content="Explore Penpal AI, Huzz Pro, Nova Companion, and StickItInApp." />
-  <link rel="icon" href="subsly.png" />
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;800&display=swap" rel="stylesheet">
-  <style>
-    :root{
-      --bg:#0b0d12; --panel:#0f1219; --card:#111522; --border:rgba(255,255,255,0.08);
-      --text:#e7e9ee; --muted:#a9b0bd; --primary:#6ea8fe; --accent:#7af0c0;
-      --radius:18px; --shadow:0 12px 30px rgba(0,0,0,.35);
-      --grad: radial-gradient(900px 500px at 80% -10%, rgba(110,168,254,.22), transparent 60%),
-              radial-gradient(700px 420px at -10% 0%, rgba(122,240,192,.18), transparent 55%);
-    }
-    @media (prefers-color-scheme: light){
-      :root{
-        --bg:#f7f9fc; --panel:#fff; --card:#fff; --border:rgba(10,16,30,.08);
-        --text:#121620; --muted:#4d5568; --shadow:0 12px 30px rgba(10,16,30,.08);
-        --grad: radial-gradient(900px 500px at 80% -10%, rgba(110,168,254,.16), transparent 60%),
-                radial-gradient(700px 420px at -10% 0%, rgba(122,240,192,.12), transparent 55%);
-      }
-    }
-    *{box-sizing:border-box} html,body{height:100%}
-    body{margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial;background:var(--bg);color:var(--text);letter-spacing:.01em}
-    img{max-width:100%;display:block}
-    .wrap{min-height:100dvh;display:grid;grid-template-rows:auto 1fr auto;background:var(--grad),var(--bg)}
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Subsfan — iOS and Mac apps</title>
+<meta name="description" content="Subsfan builds small, focused iOS and Mac apps: Therian Shift, Penpal AI, Huzz Pro, Nova Companion, StickItInApp, ShutIt, Mogwave and Freshset.">
+<meta name="theme-color" content="#08090D">
+<link rel="icon" href="subsly.png">
+<style>
+:root{
+  --bg:#08090D;
+  --surface:#0F111A;
+  --surface-2:#151827;
+  --line:rgba(255,255,255,.09);
+  --line-strong:rgba(255,255,255,.16);
+  --fg:#F2F4F8;
+  --muted:#9AA3B4;
+  --a1:#6EA8FE;
+  --a2:#7AF0C0;
+  --r:18px;
+  --pad:clamp(1.1rem,4vw,2rem);
+  --ff:-apple-system,BlinkMacSystemFont,"SF Pro Text","Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{
+  font-family:var(--ff);background:var(--bg);color:var(--fg);
+  line-height:1.55;-webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+img{max-width:100%;display:block}
+a{color:inherit;text-decoration:none}
+.wrap{width:min(1140px,100% - var(--pad)*2);margin-inline:auto}
 
-    header{position:sticky;top:0;z-index:10;background:color-mix(in oklab, var(--panel) 85%, transparent);border-bottom:1px solid var(--border);backdrop-filter:blur(8px)}
-    .nav{max-width:1100px;margin:0 auto;padding:14px 16px;display:flex;align-items:center;justify-content:space-between;gap:12px}
-    .brand{display:inline-flex;gap:10px;align-items:center;text-decoration:none;color:var(--text)}
-    .brand-img{width:28px;height:28px;border-radius:6px;box-shadow:var(--shadow)}
-    .btn{appearance:none;border:1px solid var(--border);background:var(--card);color:var(--text);padding:10px 14px;border-radius:12px;font-weight:600;text-decoration:none;cursor:pointer;transition:transform .15s ease,border-color .15s ease}
-    .btn:hover{transform:translateY(-1px);border-color:color-mix(in oklab, var(--primary), #fff 12%)}
-    .btn.primary{background:linear-gradient(180deg, color-mix(in oklab, var(--primary), #fff 15%), var(--primary));border-color:transparent;color:#0a0f16}
+/* ---------- header: a bar, not a wall of buttons ---------- */
+.bar{
+  position:sticky;top:0;z-index:50;
+  background:rgba(8,9,13,.78);backdrop-filter:blur(14px);
+  border-bottom:1px solid var(--line);
+}
+.bar__in{display:flex;align-items:center;justify-content:space-between;gap:1rem;height:58px}
+.brand{display:flex;align-items:center;gap:.6rem;font-weight:650;letter-spacing:-.01em}
+.brand img{width:26px;height:26px;border-radius:7px}
+.bar__nav{display:flex;gap:.35rem}
+.bar__nav a{
+  display:inline-flex;align-items:center;min-height:40px;
+  padding:0 .85rem;border-radius:999px;font-size:.9rem;color:var(--muted);
+  transition:color .2s,background .2s;
+}
+.bar__nav a:hover{color:var(--fg);background:rgba(255,255,255,.06)}
 
-    .hero{max-width:1100px;margin:24px auto 0;padding:22px 16px;text-align:center}
-    .hero h1{margin:0 0 8px;font-size:clamp(26px,5vw,42px);letter-spacing:-.02em}
-    .hero p{margin:0 auto;max-width:760px;color:var(--muted);font-size:clamp(14px,2.6vw,18px)}
+/* ---------- hero ---------- */
+.hero{padding:clamp(3rem,11vw,6.5rem) 0 clamp(2rem,6vw,3.25rem);position:relative}
+.hero::before{
+  content:"";position:absolute;inset:-30% -20% auto;height:70vh;z-index:-1;
+  background:
+    radial-gradient(46rem 26rem at 74% 0%,rgba(110,168,254,.20),transparent 62%),
+    radial-gradient(38rem 22rem at 12% 6%,rgba(122,240,192,.14),transparent 58%);
+  pointer-events:none;
+}
+.hero h1{
+  font-size:clamp(2rem,7.4vw,3.6rem);line-height:1.06;letter-spacing:-.035em;
+  font-weight:700;max-width:17ch;
+}
+.hero h1 em{
+  font-style:normal;
+  background:linear-gradient(96deg,var(--a1),var(--a2));
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+}
+.hero p{margin-top:1.05rem;color:var(--muted);font-size:clamp(1rem,2.4vw,1.12rem);max-width:52ch}
 
-    .grid{max-width:1100px;margin:20px auto 40px;padding:0 16px;display:grid;gap:14px;grid-template-columns:1fr}
-    @media(min-width:860px){.grid{grid-template-columns:1fr 1fr}}
-    .card{background:color-mix(in oklab, var(--card) 92%, transparent);border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden;transition:transform .18s ease,border-color .18s ease}
-    .card:hover{transform:translateY(-3px);border-color:color-mix(in oklab, var(--primary), #fff 15%)}
-    .app{display:grid;grid-template-columns:auto 1fr;gap:14px;padding:16px}
-    .icon{width:84px;height:84px;border-radius:18px;overflow:hidden;box-shadow:var(--shadow);flex:0 0 auto}
-    .title h2{margin:0;font-size:20px;letter-spacing:-.01em}
-    .title p{margin:6px 0 0;color:var(--muted);font-size:14px}
-    .body{padding:0 16px 16px;color:var(--muted);font-size:15px;line-height:1.55}
-    .actions{padding:14px 16px;border-top:1px solid var(--border);display:flex;flex-wrap:wrap;gap:10px;background:color-mix(in oklab, var(--panel) 90%, transparent)}
+/* ---------- app grid ---------- */
+.apps{padding-bottom:clamp(3rem,9vw,5.5rem)}
+.apps__head{display:flex;align-items:baseline;justify-content:space-between;gap:1rem;margin-bottom:1.15rem}
+.apps__head h2{font-size:1.05rem;letter-spacing:-.01em}
+.apps__head span{color:var(--muted);font-size:.88rem}
+.grid{display:grid;gap:.85rem;grid-template-columns:1fr}
+@media (min-width:620px){ .grid{grid-template-columns:repeat(2,1fr);gap:1rem} }
+@media (min-width:1000px){ .grid{grid-template-columns:repeat(3,1fr)} }
 
-    footer{border-top:1px solid var(--border);background:color-mix(in oklab, var(--panel) 90%, transparent)}
-    .foot{max-width:1100px;margin:0 auto;padding:18px 16px;font-size:14px;color:var(--muted);display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;align-items:center}
-    .brand-foot{display:inline-flex;gap:10px;align-items:center}
-    .brand-foot img{width:24px;height:24px;border-radius:5px}
-    .links{display:flex;gap:12px;flex-wrap:wrap}
-    .links a{color:var(--muted);text-decoration:none;border-bottom:1px dashed transparent}
-    .links a:hover{border-color:var(--muted)}
-  </style>
+.app{
+  position:relative;display:flex;flex-direction:column;gap:.85rem;height:100%;
+  background:var(--surface);border:1px solid var(--line);border-radius:var(--r);
+  padding:1.15rem;transition:border-color .22s,transform .22s,background .22s;
+}
+.app__top{display:flex;gap:.85rem;align-items:flex-start}
+@media (hover:hover){
+  .app:hover{border-color:var(--line-strong);background:var(--surface-2);transform:translateY(-2px)}
+}
+.app__hit{position:absolute;inset:0;border-radius:var(--r)}
+.app__icon{flex:0 0 auto;width:56px;height:56px;border-radius:14px;border:1px solid var(--line)}
+.app__text{min-width:0}
+.app__name{font-size:1.06rem;letter-spacing:-.015em;font-weight:650}
+.app__tag{color:var(--a1);font-size:.86rem;margin-top:.1rem}
+.app__body{color:var(--muted);font-size:.92rem;margin-top:.55rem}
+.app__acts{margin-top:auto;display:flex;flex-wrap:wrap;gap:.5rem;position:relative;z-index:1}
+.act{
+  display:inline-flex;align-items:center;min-height:42px;
+  padding:0 .95rem;border-radius:11px;font-size:.86rem;font-weight:550;
+  border:1px solid var(--line);color:var(--fg);transition:background .2s,border-color .2s;
+}
+.act:hover{background:rgba(255,255,255,.06);border-color:var(--line-strong)}
+.act--primary{background:var(--fg);color:#0A0C12;border-color:transparent;font-weight:600}
+.act--primary:hover{background:#fff}
+
+/* ---------- footer ---------- */
+footer{border-top:1px solid var(--line);padding:1.9rem 0 2.6rem}
+.foot{display:flex;flex-direction:column;gap:.9rem;align-items:center;text-align:center;color:var(--muted);font-size:.88rem}
+.foot__links{display:flex;flex-wrap:wrap;justify-content:center;gap:0 .35rem}
+.foot__links a{display:inline-flex;align-items:center;min-height:44px;padding:0 .7rem;border-radius:8px}
+.foot__links a:hover{color:var(--fg);background:rgba(255,255,255,.06)}
+@media (min-width:620px){ .foot{flex-direction:row;justify-content:space-between;text-align:left} }
+
+@media (prefers-reduced-motion:reduce){ *{transition:none!important} }
+</style>
 </head>
 <body>
-  <div class="wrap">
-    <header>
-      <nav class="nav">
-        <a class="brand" href="/"><img class="brand-img" src="subsly.png" alt="Subsly logo"></a>
-        <div style="display:flex;gap:8px;flex-wrap:wrap">
-          <a class="btn" href="penpal.html">Penpal AI</a>
-          <a class="btn" href="huzzpro.html">Huzz Pro</a>
-          <a class="btn" href="nova.html">Nova Companion</a>
-          <a class="btn" href="stickitinapp">StickItInApp</a>
-          <a class="btn" href="shutit.html">ShutIt</a>
-          <a class="btn" href="mogwave.html">Mogwave</a>
-          <a class="btn" href="freshset.html">Freshset</a>
-          <a class="btn" href="therianshift.html">Therian Shift</a>
-        </div>
-      </nav>
-    </header>
 
-    <main>
-      <section class="hero">
-        <h1>Smart iOS apps. One simple home.</h1>
-        <p>Explore <strong>Penpal AI</strong>, <strong>Huzz Pro</strong>, <strong>Nova Companion</strong>, <strong>StickItInApp</strong>, <strong>ShutIt</strong>, <strong>Mogwave</strong> and <strong>Therian Shift</strong>. Tap an icon to visit each app's landing page.</p>
-      </section>
-
-      <section class="grid" id="apps">
-        <!-- Therian Shift -->
-        <article class="card">
-          <div class="app">
-            <a class="icon" href="therianshift.html" aria-label="Therian Shift landing">
-              <img src="therianshift.png" alt="Therian Shift icon">
-            </a>
-            <div class="title">
-              <h2>Therian Shift</h2>
-              <p>See yourself as your animal.</p>
-            </div>
-          </div>
-          <div class="body">
-            Turn a photo of yourself into your animal side — any animal, any level, as a therian or as your fursona.
-          </div>
-          <div class="actions">
-            <a class="btn primary" href="therianshift.html">View Therian Shift</a>
-            <a class="btn" href="terms-therianshift.html">Subscription Terms</a>
-          </div>
-        </article>
-
-        <!-- Penpal AI -->
-        <article class="card">
-          <div class="app">
-            <a class="icon" href="penpal.html" aria-label="Penpal AI landing">
-              <img src="penpal.png" alt="Penpal AI icon">
-            </a>
-            <div class="title">
-              <h2>Penpal AI</h2>
-              <p>Your personal AI companion.</p>
-            </div>
-          </div>
-          <div class="body">
-            Natural chat, custom instructions, memory, image generation, voice notes, and live-call credits.
-          </div>
-          <div class="actions">
-            <a class="btn primary" href="penpal.html">View Penpal AI</a>
-            <a class="btn" href="penpal/subscriptions.html">Subscription Terms</a>
-          </div>
-        </article>
-
-        <!-- Huzz Pro -->
-        <article class="card">
-          <div class="app">
-            <a class="icon" href="huzzpro.html" aria-label="Huzz Pro landing">
-              <img src="huzzpro.png" alt="Huzz Pro icon">
-            </a>
-            <div class="title">
-              <h2>Huzz Pro</h2>
-              <p>Your AI wingman — clever, witty, fast.</p>
-            </div>
-          </div>
-          <div class="body">
-            Craft razor-sharp replies, keep the vibe, and never miss your moment. Works with chats and screenshots.
-          </div>
-          <div class="actions">
-            <a class="btn primary" href="huzzpro.html">View Huzz Pro</a>
-            <a class="btn" href="https://apps.apple.com/gb/app/huzz-pro/id6747211112">App Store</a>
-          </div>
-        </article>
-
-        <!-- Nova Companion -->
-        <article class="card">
-          <div class="app">
-            <a class="icon" href="nova.html" aria-label="Nova Companion landing">
-              <img src="novalogo.png" alt="Nova Companion icon">
-            </a>
-            <div class="title">
-              <h2>Nova Companion</h2>
-              <p>An AI companion that actually gets you.</p>
-            </div>
-          </div>
-          <div class="body">
-            Natural chat, image understanding, gentle reminders, and customizable personas that match your vibe.
-          </div>
-          <div class="actions">
-            <a class="btn primary" href="nova.html">View Nova</a>
-            <a class="btn" href="https://apps.apple.com/gb/app/nov%C3%A1/id6747578159">App Store</a>
-          </div>
-        </article>
-
-        <!-- StickItInApp -->
-        <article class="card">
-          <div class="app">
-            <a class="icon" href="stickitinapp" aria-label="StickItInApp landing">
-              <img src="stickitinapp.png" alt="StickItInApp icon">
-            </a>
-            <div class="title">
-              <h2>StickItInApp</h2>
-              <p>Power management that hits different.</p>
-            </div>
-          </div>
-          <div class="body">
-            Personalize your charging experience with custom sounds, real-time velocity analytics, and proactive 80% health protection.
-          </div>
-          <div class="actions">
-            <a class="btn primary" href="stickitinapp">View StickItInApp</a>
-            <a class="btn" href="#">App Store</a>
-          </div>
-        </article>
-
-        <!-- ShutIt -->
-        <article class="card">
-          <div class="app">
-            <a class="icon" href="shutit.html" aria-label="ShutIt landing">
-              <img src="/shutit.png" alt="ShutIt icon">
-            </a>
-            <div class="title">
-              <h2>ShutIt</h2>
-              <p>A little sound before your Mac goes quiet.</p>
-            </div>
-          </div>
-          <div class="body">
-            Play any sound the moment you close your MacBook lid — the same clamshell signal on every Mac, 2011 to today.
-          </div>
-          <div class="actions">
-            <a class="btn primary" href="shutit.html">View ShutIt</a>
-            <a class="btn" href="#">Download for Mac</a>
-          </div>
-        </article>
-
-        <article class="card">
-          <div class="app">
-            <a class="icon" href="mogwave.html" aria-label="Mogwave landing">
-              <img src="mogwave.png" width="84" height="84" alt="Mogwave icon" style="border-radius:16px;display:block">
-            </a>
-            <div class="title">
-              <h2>Mogwave</h2>
-              <p>Train a deeper voice, measured.</p>
-            </div>
-          </div>
-          <div class="body">
-            Measures your speaking pitch on your iPhone, finds the lowest register you can hold comfortably, and tracks the trend over weeks.
-          </div>
-          <div class="actions">
-            <a class="btn primary" href="mogwave.html">View Mogwave</a>
-            <a class="btn" href="privacy-mogwave.html">Privacy</a>
-          </div>
-        </article>
-
-        <article class="card">
-          <div class="app">
-            <a class="icon" href="freshset.html" aria-label="Freshset landing">
-              <img src="freshset.png" width="84" height="84" alt="Freshset icon" style="border-radius:16px;display:block">
-            </a>
-            <div class="title">
-              <h2>Freshset</h2>
-              <p>See the manicure on your own hands.</p>
-            </div>
-          </div>
-          <div class="body">
-            Take one photo of your hand and see a set on it before you book — copy any inspiration picture, change the colour, pick the shape and length, and get the routine to ask for.
-          </div>
-          <div class="actions">
-            <a class="btn primary" href="freshset.html">View Freshset</a>
-            <a class="btn" href="privacy-freshset.html">Privacy</a>
-          </div>
-        </article>
-      </section>
-    </main>
-
-    <footer>
-      <div class="foot">
-        <div class="brand-foot">
-          <img src="subsly.png" alt="Subsly logo"><span>© <span id="year"></span></span>
-        </div>
-        <div class="links">
-          <a href="contact.html">Contact</a>
-          <a href="privacy.html">Privacy</a>
-          <a href="terms.html">Terms</a>
-        </div>
-      </div>
-    </footer>
+<header class="bar">
+  <div class="wrap bar__in">
+    <a class="brand" href="/"><img src="subsly.png" alt=""><span>Subsfan</span></a>
+    <nav class="bar__nav">
+      <a href="#apps">Apps</a>
+      <a href="contact.html">Contact</a>
+    </nav>
   </div>
+</header>
 
-  <script>document.getElementById('year').textContent=new Date().getFullYear()</script>
+<main>
+  <section class="wrap hero">
+    <h1>Small apps that <em>do one thing</em> properly.</h1>
+    <p>Eight iOS and Mac apps, built and supported by one studio. Pick one to see what it does.</p>
+  </section>
+
+  <section class="wrap apps" id="apps">
+    <div class="apps__head">
+      <h2>All apps</h2>
+      <span>8 apps</span>
+    </div>
+    <div class="grid">
+      <article class="app">
+        <a class="app__hit" href="therianshift.html" aria-label="Therian Shift"></a>
+        <div class="app__top">
+          <img class="app__icon" src="therianshift.png" alt="" width="72" height="72" loading="lazy" decoding="async">
+          <div class="app__text">
+          <h2 class="app__name">Therian Shift</h2>
+          <p class="app__tag">See yourself as your animal.</p>
+          <p class="app__body">Turn a photo of yourself into your animal side — any animal, any level, as a therian or as your fursona.</p>
+        </div>
+        </div>
+        <div class="app__acts">
+          <a class="act act--primary" href="therianshift.html">View Therian Shift</a>
+          <a class="act" href="terms-therianshift.html">Subscription Terms</a>
+        </div>
+      </article>
+      <article class="app">
+        <a class="app__hit" href="penpal.html" aria-label="Penpal AI"></a>
+        <div class="app__top">
+          <img class="app__icon" src="penpal.png" alt="" width="72" height="72" loading="lazy" decoding="async">
+          <div class="app__text">
+          <h2 class="app__name">Penpal AI</h2>
+          <p class="app__tag">Your personal AI companion.</p>
+          <p class="app__body">Natural chat, custom instructions, memory, image generation, voice notes, and live-call credits.</p>
+        </div>
+        </div>
+        <div class="app__acts">
+          <a class="act act--primary" href="penpal.html">View Penpal AI</a>
+          <a class="act" href="penpal/subscriptions.html">Subscription Terms</a>
+        </div>
+      </article>
+      <article class="app">
+        <a class="app__hit" href="huzzpro.html" aria-label="Huzz Pro"></a>
+        <div class="app__top">
+          <img class="app__icon" src="huzzpro.png" alt="" width="72" height="72" loading="lazy" decoding="async">
+          <div class="app__text">
+          <h2 class="app__name">Huzz Pro</h2>
+          <p class="app__tag">Your AI wingman — clever, witty, fast.</p>
+          <p class="app__body">Craft razor-sharp replies, keep the vibe, and never miss your moment. Works with chats and screenshots.</p>
+        </div>
+        </div>
+        <div class="app__acts">
+          <a class="act act--primary" href="huzzpro.html">View Huzz Pro</a>
+          <a class="act" href="https://apps.apple.com/gb/app/huzz-pro/id6747211112">App Store</a>
+        </div>
+      </article>
+      <article class="app">
+        <a class="app__hit" href="nova.html" aria-label="Nova Companion"></a>
+        <div class="app__top">
+          <img class="app__icon" src="novalogo.png" alt="" width="72" height="72" loading="lazy" decoding="async">
+          <div class="app__text">
+          <h2 class="app__name">Nova Companion</h2>
+          <p class="app__tag">An AI companion that actually gets you.</p>
+          <p class="app__body">Natural chat, image understanding, gentle reminders, and customizable personas that match your vibe.</p>
+        </div>
+        </div>
+        <div class="app__acts">
+          <a class="act act--primary" href="nova.html">View Nova</a>
+          <a class="act" href="https://apps.apple.com/gb/app/nov%C3%A1/id6747578159">App Store</a>
+        </div>
+      </article>
+      <article class="app">
+        <a class="app__hit" href="stickitinapp" aria-label="StickItInApp"></a>
+        <div class="app__top">
+          <img class="app__icon" src="stickitinapp.png" alt="" width="72" height="72" loading="lazy" decoding="async">
+          <div class="app__text">
+          <h2 class="app__name">StickItInApp</h2>
+          <p class="app__tag">Power management that hits different.</p>
+          <p class="app__body">Personalize your charging experience with custom sounds, real-time velocity analytics, and proactive 80% health protection.</p>
+        </div>
+        </div>
+        <div class="app__acts">
+          <a class="act act--primary" href="stickitinapp">View StickItInApp</a>
+          <a class="act" href="#">App Store</a>
+        </div>
+      </article>
+      <article class="app">
+        <a class="app__hit" href="shutit.html" aria-label="ShutIt"></a>
+        <div class="app__top">
+          <img class="app__icon" src="/shutit.png" alt="" width="72" height="72" loading="lazy" decoding="async">
+          <div class="app__text">
+          <h2 class="app__name">ShutIt</h2>
+          <p class="app__tag">A little sound before your Mac goes quiet.</p>
+          <p class="app__body">Play any sound the moment you close your MacBook lid — the same clamshell signal on every Mac, 2011 to today.</p>
+        </div>
+        </div>
+        <div class="app__acts">
+          <a class="act act--primary" href="shutit.html">View ShutIt</a>
+          <a class="act" href="#">Download for Mac</a>
+        </div>
+      </article>
+      <article class="app">
+        <a class="app__hit" href="mogwave.html" aria-label="Mogwave"></a>
+        <div class="app__top">
+          <img class="app__icon" src="mogwave.png" alt="" width="72" height="72" loading="lazy" decoding="async">
+          <div class="app__text">
+          <h2 class="app__name">Mogwave</h2>
+          <p class="app__tag">Train a deeper voice, measured.</p>
+          <p class="app__body">Measures your speaking pitch on your iPhone, finds the lowest register you can hold comfortably, and tracks the trend over weeks.</p>
+        </div>
+        </div>
+        <div class="app__acts">
+          <a class="act act--primary" href="mogwave.html">View Mogwave</a>
+          <a class="act" href="privacy-mogwave.html">Privacy</a>
+        </div>
+      </article>
+      <article class="app">
+        <a class="app__hit" href="freshset.html" aria-label="Freshset"></a>
+        <div class="app__top">
+          <img class="app__icon" src="freshset.png" alt="" width="72" height="72" loading="lazy" decoding="async">
+          <div class="app__text">
+          <h2 class="app__name">Freshset</h2>
+          <p class="app__tag">See the manicure on your own hands.</p>
+          <p class="app__body">Take one photo of your hand and see a set on it before you book — copy any inspiration picture, change the colour, pick the shape and length, and get the routine to ask for.</p>
+        </div>
+        </div>
+        <div class="app__acts">
+          <a class="act act--primary" href="freshset.html">View Freshset</a>
+          <a class="act" href="privacy-freshset.html">Privacy</a>
+        </div>
+      </article>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap foot">
+    <span>&copy; <span id="year"></span> Subsfan</span>
+    <div class="foot__links">
+      <a href="contact.html">Contact</a>
+      <a href="privacy.html">Privacy</a>
+      <a href="terms.html">Terms</a>
+    </div>
+  </div>
+</footer>
+
+<script>document.getElementById('year').textContent=new Date().getFullYear()</script>
 </body>
 </html>
